@@ -1,0 +1,285 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "ffd30af63e646075d9ef323fb5c1689f",
+    "entities": [
+      {
+        "tableName": "foods",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `unit` TEXT NOT NULL, `unitNote` TEXT, `lastAmount` REAL NOT NULL, `additivesJson` TEXT NOT NULL, `perKcal` REAL NOT NULL, `perProtein` REAL NOT NULL, `perSugar` REAL NOT NULL, `perFat` REAL NOT NULL, `perFiber` REAL NOT NULL, `perSalt` REAL NOT NULL, `perWater` REAL NOT NULL, `perVitC` REAL NOT NULL, `perVitD` REAL NOT NULL, `perVitB` REAL NOT NULL, `perCa` REAL NOT NULL, `perFe` REAL NOT NULL, `perMg` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unit",
+            "columnName": "unit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unitNote",
+            "columnName": "unitNote",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "lastAmount",
+            "columnName": "lastAmount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "additivesJson",
+            "columnName": "additivesJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perKcal",
+            "columnName": "perKcal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perProtein",
+            "columnName": "perProtein",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perSugar",
+            "columnName": "perSugar",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perFat",
+            "columnName": "perFat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perFiber",
+            "columnName": "perFiber",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perSalt",
+            "columnName": "perSalt",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perWater",
+            "columnName": "perWater",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perVitC",
+            "columnName": "perVitC",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perVitD",
+            "columnName": "perVitD",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perVitB",
+            "columnName": "perVitB",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perCa",
+            "columnName": "perCa",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perFe",
+            "columnName": "perFe",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perMg",
+            "columnName": "perMg",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "entries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foodId` INTEGER NOT NULL, `amount` REAL NOT NULL, `timestamp` INTEGER NOT NULL, FOREIGN KEY(`foodId`) REFERENCES `foods`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "foodId",
+            "columnName": "foodId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_entries_foodId",
+            "unique": false,
+            "columnNames": [
+              "foodId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_entries_foodId` ON `${TABLE_NAME}` (`foodId`)"
+          },
+          {
+            "name": "index_entries_timestamp",
+            "unique": false,
+            "columnNames": [
+              "timestamp"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_entries_timestamp` ON `${TABLE_NAME}` (`timestamp`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "foods",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "foodId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "goals",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`nutrientKey` TEXT NOT NULL, `target` REAL NOT NULL, PRIMARY KEY(`nutrientKey`))",
+        "fields": [
+          {
+            "fieldPath": "nutrientKey",
+            "columnName": "nutrientKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "target",
+            "columnName": "target",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "nutrientKey"
+          ]
+        }
+      },
+      {
+        "tableName": "daily_activity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, `totalCaloriesKcal` REAL, `activeCaloriesKcal` REAL, `steps` INTEGER, `exerciseMinutes` INTEGER, `sleepMinutes` INTEGER, `restingHr` INTEGER, `syncedAt` INTEGER NOT NULL, PRIMARY KEY(`date`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalCaloriesKcal",
+            "columnName": "totalCaloriesKcal",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "activeCaloriesKcal",
+            "columnName": "activeCaloriesKcal",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "steps",
+            "columnName": "steps",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "exerciseMinutes",
+            "columnName": "exerciseMinutes",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "sleepMinutes",
+            "columnName": "sleepMinutes",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "restingHr",
+            "columnName": "restingHr",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "syncedAt",
+            "columnName": "syncedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ffd30af63e646075d9ef323fb5c1689f')"
+    ]
+  }
+}
