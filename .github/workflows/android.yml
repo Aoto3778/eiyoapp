@@ -37,7 +37,7 @@ jobs:
           echo "SIGNING_KEY_ALIAS=$KEY_ALIAS" >> "$GITHUB_ENV"
           echo "SIGNING_KEY_PASSWORD=$KEY_PASSWORD" >> "$GITHUB_ENV"
       - name: Test and build APK
-        run: ./gradlew testDebugUnitTest assembleRelease --stacktrace
+        run: ./gradlew testDebugUnitTest lintDebug assembleRelease --stacktrace
       - name: Rename installer
         run: |
           installer_name="eiyoapp-${GITHUB_REF_NAME//\//-}.apk"
@@ -51,4 +51,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${{ github.ref_name }}" "eiyoapp-${{ github.ref_name }}.apk" --generate-notes --title "私の栄養記録 ${{ github.ref_name }}"
+        run: gh release create "${{ github.ref_name }}" "eiyoapp-${{ github.ref_name }}.apk" --generate-notes --title "私の健康記録 ${{ github.ref_name }}"

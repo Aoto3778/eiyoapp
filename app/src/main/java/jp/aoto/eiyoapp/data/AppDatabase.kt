@@ -4,14 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [FoodEntity::class, EntryEntity::class, GoalEntity::class, DailyActivityEntity::class],
-    version = 1,
+    entities = [
+        FoodEntity::class, EntryEntity::class, GoalEntity::class, DailyActivityEntity::class,
+        WorkoutExerciseEntity::class, WorkoutSessionEntity::class, WorkoutSetEntity::class,
+        BodyMetricEntity::class, WorkoutSettingEntity::class,
+    ],
+    version = 2,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -19,12 +24,14 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun entryDao(): EntryDao
     abstract fun goalDao(): GoalDao
     abstract fun activityDao(): ActivityDao
+    abstract fun workoutDao(): WorkoutDao
 
     companion object {
         @Volatile private var instance: AppDatabase? = null
 
         fun get(context: Context): AppDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(context, AppDatabase::class.java, "eiyo.db")
+                .addMigrations(MIGRATION_1_2)
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
@@ -33,9 +40,33 @@ abstract class AppDatabase : RoomDatabase() {
                             instance?.goalDao()?.insertAll(listOf(
                                 GoalEntity("protein", 80.0), GoalEntity("water", 2000.0),
                             ))
+                            instance?.workoutDao()?.insertSettings(listOf(
+                                WorkoutSettingEntity("weekGoal", "2"),
+                                WorkoutSettingEntity("restSeconds", "90"),
+                                WorkoutSettingEntity("recoveryAllowance", "1"),
+                                WorkoutSettingEntity("defaultStepKg", "2.5"),
+                                WorkoutSettingEntity("xp", "0"),
+                            ))
                         }
                     }
                 }).build().also { instance = it }
+        }
+
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("""CREATE TABLE IF NOT EXISTS `workout_exercises` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `part` TEXT NOT NULL, `unit` TEXT NOT NULL, `stepKg` REAL NOT NULL, `provisional` INTEGER NOT NULL, `photoUri` TEXT, `note` TEXT, `createdAt` INTEGER NOT NULL, `mergedInto` INTEGER)""")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_workout_exercises_mergedInto` ON `workout_exercises` (`mergedInto`)")
+                db.execSQL("""CREATE TABLE IF NOT EXISTS `workout_sessions` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` TEXT NOT NULL, `startedAt` INTEGER NOT NULL, `endedAt` INTEGER, `activeExerciseId` INTEGER, `conditionNote` TEXT NOT NULL, `completed` INTEGER NOT NULL, FOREIGN KEY(`activeExerciseId`) REFERENCES `workout_exercises`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL)""")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_workout_sessions_date` ON `workout_sessions` (`date`)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_workout_sessions_activeExerciseId` ON `workout_sessions` (`activeExerciseId`)")
+                db.execSQL("""CREATE TABLE IF NOT EXISTS `workout_sets` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sessionId` INTEGER NOT NULL, `exerciseId` INTEGER NOT NULL, `setNo` INTEGER NOT NULL, `weightKg` REAL, `reps` INTEGER, `seconds` INTEGER, `rpe` INTEGER, `isPr` INTEGER NOT NULL, `recordedAt` INTEGER NOT NULL, FOREIGN KEY(`sessionId`) REFERENCES `workout_sessions`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE, FOREIGN KEY(`exerciseId`) REFERENCES `workout_exercises`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT)""")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_workout_sets_sessionId` ON `workout_sets` (`sessionId`)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_workout_sets_exerciseId` ON `workout_sets` (`exerciseId`)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_workout_sets_recordedAt` ON `workout_sets` (`recordedAt`)")
+                db.execSQL("""CREATE TABLE IF NOT EXISTS `body_metrics` (`date` TEXT NOT NULL, `weightKg` REAL, `bodyFatPct` REAL, `armCm` REAL, `chestCm` REAL, `waistCm` REAL, `thighCm` REAL, PRIMARY KEY(`date`))""")
+                db.execSQL("""CREATE TABLE IF NOT EXISTS `workout_settings` (`key` TEXT NOT NULL, `value` TEXT NOT NULL, PRIMARY KEY(`key`))""")
+                db.execSQL("INSERT OR IGNORE INTO `workout_settings` (`key`,`value`) VALUES ('weekGoal','2'),('restSeconds','90'),('recoveryAllowance','1'),('defaultStepKg','2.5'),('xp','0')")
+            }
         }
     }
 }

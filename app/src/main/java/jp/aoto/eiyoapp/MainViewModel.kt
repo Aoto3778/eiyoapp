@@ -8,15 +8,23 @@ import jp.aoto.eiyoapp.data.DailyActivityEntity
 import jp.aoto.eiyoapp.data.EiyoRepository
 import jp.aoto.eiyoapp.data.FoodEntity
 import jp.aoto.eiyoapp.data.Nutrients
+import jp.aoto.eiyoapp.data.BodyMetricEntity
+import jp.aoto.eiyoapp.data.RecordedSet
+import jp.aoto.eiyoapp.data.WorkoutExerciseEntity
+import jp.aoto.eiyoapp.data.WorkoutRepository
+import jp.aoto.eiyoapp.data.WorkoutSetEntity
 import jp.aoto.eiyoapp.domain.Exporter
+import jp.aoto.eiyoapp.domain.WorkoutExporter
 import jp.aoto.eiyoapp.health.HealthAvailability
 import jp.aoto.eiyoapp.health.HealthConnectManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.time.LocalDate
 
 data class HomeState(
@@ -25,9 +33,11 @@ data class HomeState(
     val activity: DailyActivityEntity? = null,
 ) { val total: Nutrients get() = Exporter.sum(entries) }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class MainViewModel(
     application: Application,
     private val repository: EiyoRepository,
+    private val workoutRepository: WorkoutRepository,
     val health: HealthConnectManager,
 ) : AndroidViewModel(application) {
     private val today = LocalDate.now()
@@ -47,6 +57,24 @@ class MainViewModel(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
     val message = MutableStateFlow<String?>(null)
     val syncing = MutableStateFlow(false)
+    val workoutExercises = workoutRepository.exercises
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val activeWorkout = workoutRepository.activeSession
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
+    val activeWorkoutSets = activeWorkout.flatMapLatest { session ->
+        session?.let { workoutRepository.sessionSets(it.id) } ?: flowOf(emptyList<WorkoutSetEntity>())
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val workoutLastSets = workoutRepository.lastSets
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val workoutSettings = workoutRepository.settings
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val workoutSessions = workoutRepository.sessions(today.minusWeeks(16), today)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val workoutHistorySets = workoutRepository.sets(today.minusMonths(6), today)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val bodyMetrics = workoutRepository.bodyMetrics(today.minusMonths(6), today)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val lastRecordedSet = MutableStateFlow<RecordedSet?>(null)
 
     fun setQuery(value: String) { query.value = value }
     fun clearMessage() { message.value = null }
@@ -70,6 +98,77 @@ class MainViewModel(
     }
     fun saveManualActivity(activity: DailyActivityEntity) = viewModelScope.launch {
         repository.saveActivity(activity); message.value = "活動データを保存しました"
+    }
+
+    fun addWorkoutExercise(
+        name: String,
+        part: String,
+        unit: String,
+        stepKg: Double,
+        note: String?,
+        onSaved: (Long) -> Unit,
+    ) = viewModelScope.launch {
+        runCatching { workoutRepository.addExercise(name, part, unit, stepKg, note = note) }
+            .onSuccess { id -> message.value = "種目を登録しました"; onSaved(id) }
+            .onFailure { message.value = "種目を登録できませんでした: ${it.message}" }
+    }
+
+    fun renameWorkoutExercise(id: Long, name: String) = viewModelScope.launch {
+        runCatching { workoutRepository.renameExercise(id, name) }
+            .onSuccess { message.value = "種目名を変更しました。過去の記録も引き継ぎ済みです" }
+            .onFailure { message.value = "名前を変更できませんでした" }
+    }
+
+    fun mergeWorkoutExercises(sourceId: Long, targetId: Long) = viewModelScope.launch {
+        runCatching { workoutRepository.mergeExercises(sourceId, targetId) }
+            .onSuccess { message.value = "種目を統合しました。記録は1本になります" }
+            .onFailure { message.value = "種目を統合できませんでした: ${it.message}" }
+    }
+
+    fun startWorkout(exerciseId: Long, onStarted: () -> Unit = {}) = viewModelScope.launch {
+        runCatching { workoutRepository.startOrResume(exerciseId) }
+            .onSuccess { onStarted() }
+            .onFailure { message.value = "ワークアウトを開始できませんでした" }
+    }
+
+    fun switchWorkoutExercise(exerciseId: Long) = viewModelScope.launch {
+        activeWorkout.value?.let { workoutRepository.switchExercise(it.id, exerciseId) }
+    }
+
+    fun recordWorkoutSet(
+        exercise: WorkoutExerciseEntity,
+        weightKg: Double?,
+        reps: Int?,
+        seconds: Int?,
+    ) = viewModelScope.launch {
+        val session = activeWorkout.value ?: return@launch
+        runCatching { workoutRepository.recordSet(session.id, exercise, weightKg, reps, seconds) }
+            .onSuccess { result ->
+                lastRecordedSet.value = result
+                message.value = if (result.set.isPr) "前回超え。ちゃんと強くなっています" else "セット${result.set.setNo}を記録。ここまでで十分えらい。"
+            }.onFailure { message.value = "セットを記録できませんでした: ${it.message}" }
+    }
+
+    fun setWorkoutRpe(set: WorkoutSetEntity, rpe: Int?) = viewModelScope.launch {
+        workoutRepository.setRpe(set, rpe)
+        lastRecordedSet.value = null
+    }
+
+    fun completeWorkout(conditionNote: String, onCompleted: () -> Unit) = viewModelScope.launch {
+        val session = activeWorkout.value ?: return@launch
+        runCatching { workoutRepository.completeSession(session.id, conditionNote) }
+            .onSuccess { message.value = "今日の記録を保存しました"; lastRecordedSet.value = null; onCompleted() }
+            .onFailure { message.value = it.message ?: "保存できませんでした" }
+    }
+
+    fun updateWorkoutSetting(key: String, value: String) = viewModelScope.launch {
+        workoutRepository.updateSetting(key, value)
+        message.value = "設定を保存しました"
+    }
+
+    fun saveBodyMetric(metric: BodyMetricEntity) = viewModelScope.launch {
+        workoutRepository.saveBodyMetric(metric)
+        message.value = "からだの記録を保存しました"
     }
 
     fun syncHealth(force: Boolean = false) = viewModelScope.launch {
@@ -100,6 +199,17 @@ class MainViewModel(
             val bytes = Exporter.csv(data); bytes.toString(Charsets.UTF_8) to bytes
         }
     }
+    suspend fun exportWorkout(from: LocalDate, to: LocalDate, markdown: Boolean): Pair<String, ByteArray> {
+        val workout = workoutRepository.exportData(from, to)
+        val nutrition = repository.exportData(from, to)
+        return if (markdown) {
+            val text = WorkoutExporter.markdown(from, to, workout, nutrition)
+            text to text.toByteArray()
+        } else {
+            val bytes = WorkoutExporter.csv(workout, nutrition)
+            bytes.toString(Charsets.UTF_8) to bytes
+        }
+    }
     suspend fun backup() = repository.backupJson()
     suspend fun restore(text: String) = repository.restoreJson(text)
     fun importGarminCsv(text: String) = viewModelScope.launch {
@@ -111,6 +221,6 @@ class MainViewModel(
     class Factory(private val app: EiyoApplication) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T =
-            MainViewModel(app, app.repository, app.health) as T
+            MainViewModel(app, app.repository, app.workoutRepository, app.health) as T
     }
 }
