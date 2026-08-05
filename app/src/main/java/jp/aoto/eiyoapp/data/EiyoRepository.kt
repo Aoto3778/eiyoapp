@@ -40,7 +40,7 @@ class EiyoRepository(private val db: AppDatabase) {
     )
 
     suspend fun backupJson(): String {
-        val root = JSONObject().put("version", 1)
+        val root = JSONObject().put("version", 2)
         root.put("foods", JSONArray(db.foodDao().getAll().map { f ->
             JSONObject().put("id", f.id).put("name", f.name).put("unit", f.unit)
                 .put("unitNote", f.unitNote).put("lastAmount", f.lastAmount)
@@ -62,12 +62,39 @@ class EiyoRepository(private val db: AppDatabase) {
                 .putNullable("exerciseMinutes", a.exerciseMinutes).putNullable("sleepMinutes", a.sleepMinutes)
                 .putNullable("restingHr", a.restingHr).put("syncedAt", a.syncedAt)
         }))
+        root.put("workoutExercises", JSONArray(db.workoutDao().getExercises().map { e ->
+            JSONObject().put("id", e.id).put("name", e.name).put("part", e.part)
+                .put("unit", e.unit).put("stepKg", e.stepKg).put("provisional", e.provisional)
+                .putNullable("photoUri", e.photoUri).putNullable("note", e.note)
+                .put("createdAt", e.createdAt).putNullable("mergedInto", e.mergedInto)
+        }))
+        root.put("workoutSessions", JSONArray(db.workoutDao().getAllSessions().map { s ->
+            JSONObject().put("id", s.id).put("date", s.date).put("startedAt", s.startedAt)
+                .putNullable("endedAt", s.endedAt).putNullable("activeExerciseId", s.activeExerciseId)
+                .put("conditionNote", s.conditionNote).put("completed", s.completed)
+        }))
+        root.put("workoutSets", JSONArray(db.workoutDao().getAllSets().map { s ->
+            JSONObject().put("id", s.id).put("sessionId", s.sessionId).put("exerciseId", s.exerciseId)
+                .put("setNo", s.setNo).putNullable("weightKg", s.weightKg).putNullable("reps", s.reps)
+                .putNullable("seconds", s.seconds).putNullable("rpe", s.rpe).put("isPr", s.isPr)
+                .put("recordedAt", s.recordedAt)
+        }))
+        root.put("bodyMetrics", JSONArray(db.workoutDao().getAllBodyMetrics().map { m ->
+            JSONObject().put("date", m.date).putNullable("weightKg", m.weightKg)
+                .putNullable("bodyFatPct", m.bodyFatPct).putNullable("armCm", m.armCm)
+                .putNullable("chestCm", m.chestCm).putNullable("waistCm", m.waistCm)
+                .putNullable("thighCm", m.thighCm)
+        }))
+        root.put("workoutSettings", JSONArray(db.workoutDao().getSettings().map { s ->
+            JSONObject().put("key", s.key).put("value", s.value)
+        }))
         return root.toString(2)
     }
 
     suspend fun restoreJson(text: String) {
         val root = JSONObject(text)
-        require(root.getInt("version") == 1) { "対応していないバックアップ形式です" }
+        val version = root.getInt("version")
+        require(version in 1..2) { "対応していないバックアップ形式です" }
         val foods = root.getJSONArray("foods").objects().map { o -> FoodEntity(
             id=o.getLong("id"), name=o.getString("name"), unit=o.getString("unit"),
             unitNote=o.optString("unitNote").takeIf { it.isNotBlank() && it != "null" },
@@ -85,11 +112,47 @@ class EiyoRepository(private val db: AppDatabase) {
             exerciseMinutes=o.optIntOrNull("exerciseMinutes"), sleepMinutes=o.optIntOrNull("sleepMinutes"),
             restingHr=o.optIntOrNull("restingHr"), syncedAt=o.getLong("syncedAt"),
         ) }
+        val workoutExercises = root.optJSONArray("workoutExercises")?.objects()?.map { o -> WorkoutExerciseEntity(
+            id=o.getLong("id"), name=o.getString("name"), part=o.getString("part"), unit=o.getString("unit"),
+            stepKg=o.getDouble("stepKg"), provisional=o.getBoolean("provisional"),
+            photoUri=o.optStringOrNull("photoUri"), note=o.optStringOrNull("note"),
+            createdAt=o.getLong("createdAt"), mergedInto=o.optLongOrNull("mergedInto"),
+        ) }.orEmpty()
+        val workoutSessions = root.optJSONArray("workoutSessions")?.objects()?.map { o -> WorkoutSessionEntity(
+            id=o.getLong("id"), date=o.getString("date"), startedAt=o.getLong("startedAt"),
+            endedAt=o.optLongOrNull("endedAt"), activeExerciseId=o.optLongOrNull("activeExerciseId"),
+            conditionNote=o.optString("conditionNote"), completed=o.getBoolean("completed"),
+        ) }.orEmpty()
+        val workoutSets = root.optJSONArray("workoutSets")?.objects()?.map { o -> WorkoutSetEntity(
+            id=o.getLong("id"), sessionId=o.getLong("sessionId"), exerciseId=o.getLong("exerciseId"),
+            setNo=o.getInt("setNo"), weightKg=o.optDoubleOrNull("weightKg"), reps=o.optIntOrNull("reps"),
+            seconds=o.optIntOrNull("seconds"), rpe=o.optIntOrNull("rpe"), isPr=o.getBoolean("isPr"),
+            recordedAt=o.getLong("recordedAt"),
+        ) }.orEmpty()
+        val bodyMetrics = root.optJSONArray("bodyMetrics")?.objects()?.map { o -> BodyMetricEntity(
+            date=o.getString("date"), weightKg=o.optDoubleOrNull("weightKg"),
+            bodyFatPct=o.optDoubleOrNull("bodyFatPct"), armCm=o.optDoubleOrNull("armCm"),
+            chestCm=o.optDoubleOrNull("chestCm"), waistCm=o.optDoubleOrNull("waistCm"),
+            thighCm=o.optDoubleOrNull("thighCm"),
+        ) }.orEmpty()
+        val workoutSettings = root.optJSONArray("workoutSettings")?.objects()?.map { o ->
+            WorkoutSettingEntity(o.getString("key"), o.getString("value"))
+        }.orEmpty()
         db.withTransaction {
             db.entryDao().deleteAll(); db.goalDao().deleteAll(); db.activityDao().deleteAll()
             db.foodDao().getAll().forEach { db.foodDao().delete(it) }
             db.foodDao().insertAll(foods); db.entryDao().insertAll(entries)
             db.goalDao().insertAll(goals); db.activityDao().insertAll(activities)
+            if (version >= 2) {
+                db.workoutDao().deleteAllSets(); db.workoutDao().deleteAllSessions()
+                db.workoutDao().deleteAllExercises(); db.workoutDao().deleteAllBodyMetrics()
+                db.workoutDao().deleteAllSettings()
+                db.workoutDao().insertExercises(workoutExercises)
+                db.workoutDao().insertSessions(workoutSessions)
+                db.workoutDao().insertSets(workoutSets)
+                db.workoutDao().insertBodyMetrics(bodyMetrics)
+                db.workoutDao().insertSettings(workoutSettings)
+            }
         }
     }
 }
@@ -112,3 +175,4 @@ private fun JSONArray.objects() = (0 until length()).map { getJSONObject(it) }
 private fun JSONObject.optDoubleOrNull(key: String) = if (isNull(key)) null else getDouble(key)
 private fun JSONObject.optLongOrNull(key: String) = if (isNull(key)) null else getLong(key)
 private fun JSONObject.optIntOrNull(key: String) = if (isNull(key)) null else getInt(key)
+private fun JSONObject.optStringOrNull(key: String) = if (isNull(key)) null else getString(key)

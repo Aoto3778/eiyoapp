@@ -1,0 +1,643 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "c2daac484d164b2ab1dc8967fa4d4eac",
+    "entities": [
+      {
+        "tableName": "foods",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `unit` TEXT NOT NULL, `unitNote` TEXT, `lastAmount` REAL NOT NULL, `additivesJson` TEXT NOT NULL, `perKcal` REAL NOT NULL, `perProtein` REAL NOT NULL, `perSugar` REAL NOT NULL, `perFat` REAL NOT NULL, `perFiber` REAL NOT NULL, `perSalt` REAL NOT NULL, `perWater` REAL NOT NULL, `perVitC` REAL NOT NULL, `perVitD` REAL NOT NULL, `perVitB` REAL NOT NULL, `perCa` REAL NOT NULL, `perFe` REAL NOT NULL, `perMg` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unit",
+            "columnName": "unit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unitNote",
+            "columnName": "unitNote",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "lastAmount",
+            "columnName": "lastAmount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "additivesJson",
+            "columnName": "additivesJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perKcal",
+            "columnName": "perKcal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perProtein",
+            "columnName": "perProtein",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perSugar",
+            "columnName": "perSugar",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perFat",
+            "columnName": "perFat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perFiber",
+            "columnName": "perFiber",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perSalt",
+            "columnName": "perSalt",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perWater",
+            "columnName": "perWater",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perVitC",
+            "columnName": "perVitC",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perVitD",
+            "columnName": "perVitD",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perVitB",
+            "columnName": "perVitB",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perCa",
+            "columnName": "perCa",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perFe",
+            "columnName": "perFe",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perMg",
+            "columnName": "perMg",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "entries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foodId` INTEGER NOT NULL, `amount` REAL NOT NULL, `timestamp` INTEGER NOT NULL, FOREIGN KEY(`foodId`) REFERENCES `foods`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "foodId",
+            "columnName": "foodId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_entries_foodId",
+            "unique": false,
+            "columnNames": [
+              "foodId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_entries_foodId` ON `${TABLE_NAME}` (`foodId`)"
+          },
+          {
+            "name": "index_entries_timestamp",
+            "unique": false,
+            "columnNames": [
+              "timestamp"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_entries_timestamp` ON `${TABLE_NAME}` (`timestamp`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "foods",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "foodId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "goals",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`nutrientKey` TEXT NOT NULL, `target` REAL NOT NULL, PRIMARY KEY(`nutrientKey`))",
+        "fields": [
+          {
+            "fieldPath": "nutrientKey",
+            "columnName": "nutrientKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "target",
+            "columnName": "target",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "nutrientKey"
+          ]
+        }
+      },
+      {
+        "tableName": "daily_activity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, `totalCaloriesKcal` REAL, `activeCaloriesKcal` REAL, `steps` INTEGER, `exerciseMinutes` INTEGER, `sleepMinutes` INTEGER, `restingHr` INTEGER, `syncedAt` INTEGER NOT NULL, PRIMARY KEY(`date`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalCaloriesKcal",
+            "columnName": "totalCaloriesKcal",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "activeCaloriesKcal",
+            "columnName": "activeCaloriesKcal",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "steps",
+            "columnName": "steps",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "exerciseMinutes",
+            "columnName": "exerciseMinutes",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "sleepMinutes",
+            "columnName": "sleepMinutes",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "restingHr",
+            "columnName": "restingHr",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "syncedAt",
+            "columnName": "syncedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date"
+          ]
+        }
+      },
+      {
+        "tableName": "workout_exercises",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `part` TEXT NOT NULL, `unit` TEXT NOT NULL, `stepKg` REAL NOT NULL, `provisional` INTEGER NOT NULL, `photoUri` TEXT, `note` TEXT, `createdAt` INTEGER NOT NULL, `mergedInto` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "part",
+            "columnName": "part",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unit",
+            "columnName": "unit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stepKg",
+            "columnName": "stepKg",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "provisional",
+            "columnName": "provisional",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "photoUri",
+            "columnName": "photoUri",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mergedInto",
+            "columnName": "mergedInto",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_workout_exercises_mergedInto",
+            "unique": false,
+            "columnNames": [
+              "mergedInto"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_exercises_mergedInto` ON `${TABLE_NAME}` (`mergedInto`)"
+          }
+        ]
+      },
+      {
+        "tableName": "workout_sessions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` TEXT NOT NULL, `startedAt` INTEGER NOT NULL, `endedAt` INTEGER, `activeExerciseId` INTEGER, `conditionNote` TEXT NOT NULL, `completed` INTEGER NOT NULL, FOREIGN KEY(`activeExerciseId`) REFERENCES `workout_exercises`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startedAt",
+            "columnName": "startedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endedAt",
+            "columnName": "endedAt",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "activeExerciseId",
+            "columnName": "activeExerciseId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "conditionNote",
+            "columnName": "conditionNote",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completed",
+            "columnName": "completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_workout_sessions_date",
+            "unique": false,
+            "columnNames": [
+              "date"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_sessions_date` ON `${TABLE_NAME}` (`date`)"
+          },
+          {
+            "name": "index_workout_sessions_activeExerciseId",
+            "unique": false,
+            "columnNames": [
+              "activeExerciseId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_sessions_activeExerciseId` ON `${TABLE_NAME}` (`activeExerciseId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "workout_exercises",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "activeExerciseId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "workout_sets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sessionId` INTEGER NOT NULL, `exerciseId` INTEGER NOT NULL, `setNo` INTEGER NOT NULL, `weightKg` REAL, `reps` INTEGER, `seconds` INTEGER, `rpe` INTEGER, `isPr` INTEGER NOT NULL, `recordedAt` INTEGER NOT NULL, FOREIGN KEY(`sessionId`) REFERENCES `workout_sessions`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`exerciseId`) REFERENCES `workout_exercises`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sessionId",
+            "columnName": "sessionId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exerciseId",
+            "columnName": "exerciseId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "setNo",
+            "columnName": "setNo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weightKg",
+            "columnName": "weightKg",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "reps",
+            "columnName": "reps",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "seconds",
+            "columnName": "seconds",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "rpe",
+            "columnName": "rpe",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "isPr",
+            "columnName": "isPr",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recordedAt",
+            "columnName": "recordedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_workout_sets_sessionId",
+            "unique": false,
+            "columnNames": [
+              "sessionId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_sets_sessionId` ON `${TABLE_NAME}` (`sessionId`)"
+          },
+          {
+            "name": "index_workout_sets_exerciseId",
+            "unique": false,
+            "columnNames": [
+              "exerciseId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_sets_exerciseId` ON `${TABLE_NAME}` (`exerciseId`)"
+          },
+          {
+            "name": "index_workout_sets_recordedAt",
+            "unique": false,
+            "columnNames": [
+              "recordedAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_workout_sets_recordedAt` ON `${TABLE_NAME}` (`recordedAt`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "workout_sessions",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "sessionId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "workout_exercises",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "exerciseId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "body_metrics",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, `weightKg` REAL, `bodyFatPct` REAL, `armCm` REAL, `chestCm` REAL, `waistCm` REAL, `thighCm` REAL, PRIMARY KEY(`date`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weightKg",
+            "columnName": "weightKg",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "bodyFatPct",
+            "columnName": "bodyFatPct",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "armCm",
+            "columnName": "armCm",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "chestCm",
+            "columnName": "chestCm",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "waistCm",
+            "columnName": "waistCm",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "thighCm",
+            "columnName": "thighCm",
+            "affinity": "REAL"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date"
+          ]
+        }
+      },
+      {
+        "tableName": "workout_settings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `value` TEXT NOT NULL, PRIMARY KEY(`key`))",
+        "fields": [
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "key"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c2daac484d164b2ab1dc8967fa4d4eac')"
+    ]
+  }
+}

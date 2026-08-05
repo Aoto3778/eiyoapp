@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">私の栄養記録</string>
+    <string name="app_name">私の健康記録</string>
     <string name="health_permissions_rationale">食事と活動量を比較するため、端末内のヘルスコネクトから歩数、カロリー、運動、睡眠、心拍を読み取ります。外部送信はしません。</string>
 </resources>

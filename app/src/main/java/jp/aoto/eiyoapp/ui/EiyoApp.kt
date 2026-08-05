@@ -97,16 +97,17 @@ import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
 
-private enum class Tab(val label: String) { HOME("ホーム"), LOG("記録"), FOODS("食品"), HISTORY("推移"), EXPORT("出力") }
+private enum class Tab(val label: String) { TODAY("今日"), FOOD("食事"), WORKOUT("筋トレ"), ANALYSIS("分析"), MORE("その他") }
 private sealed interface Overlay {
     data object Goals : Overlay
     data class FoodEdit(val food: FoodEntity? = null, val preset: String = "") : Overlay
     data object HealthGuide : Overlay
+    data object WorkoutSession : Overlay
 }
 
 @Composable
 fun EiyoApp(vm: MainViewModel) {
-    var tab by rememberSaveable { mutableStateOf(Tab.HOME) }
+    var tab by rememberSaveable { mutableStateOf(Tab.TODAY) }
     var overlay by remember { mutableStateOf<Overlay?>(null) }
     val snack = remember { SnackbarHostState() }
     val message by vm.message.collectAsStateWithLifecycle()
@@ -132,12 +133,13 @@ fun EiyoApp(vm: MainViewModel) {
                 Overlay.Goals -> GoalsScreen(vm, onBack={ overlay=null })
                 is Overlay.FoodEdit -> FoodEditScreen(vm, screen.food, screen.preset, onBack={ overlay=null })
                 Overlay.HealthGuide -> HealthGuideScreen(vm, onBack={ overlay=null }, onPermission={ permissionLauncher.launch(vm.health.permissions) })
+                Overlay.WorkoutSession -> WorkoutSessionScreen(vm, onBack={ overlay=null; tab=Tab.WORKOUT })
                 null -> when (tab) {
-                    Tab.HOME -> HomeScreen(vm, onGoals={ overlay=Overlay.Goals }, onHealthGuide={ overlay=Overlay.HealthGuide })
-                    Tab.LOG -> LogScreen(vm, onNewFood={ overlay=Overlay.FoodEdit(preset=it) })
-                    Tab.FOODS -> FoodsScreen(vm, onEdit={ overlay=Overlay.FoodEdit(it) }, onNew={ overlay=Overlay.FoodEdit() })
-                    Tab.HISTORY -> HistoryScreen(vm)
-                    Tab.EXPORT -> ExportScreen(vm)
+                    Tab.TODAY -> HomeScreen(vm, onGoals={ overlay=Overlay.Goals }, onHealthGuide={ overlay=Overlay.HealthGuide }, onWorkout={ overlay=Overlay.WorkoutSession })
+                    Tab.FOOD -> FoodAreaScreen(vm, onNewFood={ overlay=Overlay.FoodEdit(preset=it) }, onEdit={ overlay=Overlay.FoodEdit(it) })
+                    Tab.WORKOUT -> WorkoutHubScreen(vm, onOpenSession={ overlay=Overlay.WorkoutSession })
+                    Tab.ANALYSIS -> AnalysisAreaScreen(vm)
+                    Tab.MORE -> MoreAreaScreen(vm, onGoals={ overlay=Overlay.Goals }, onHealthGuide={ overlay=Overlay.HealthGuide })
                 }
             }
         }
@@ -145,9 +147,12 @@ fun EiyoApp(vm: MainViewModel) {
 }
 
 @Composable
-private fun HomeScreen(vm: MainViewModel, onGoals: () -> Unit, onHealthGuide: () -> Unit) {
+private fun HomeScreen(vm: MainViewModel, onGoals: () -> Unit, onHealthGuide: () -> Unit, onWorkout: () -> Unit) {
     val state by vm.home.collectAsStateWithLifecycle()
     val syncing by vm.syncing.collectAsStateWithLifecycle()
+    val activeWorkout by vm.activeWorkout.collectAsStateWithLifecycle()
+    val exercises by vm.workoutExercises.collectAsStateWithLifecycle()
+    val sessions by vm.workoutSessions.collectAsStateWithLifecycle()
     var manual by remember { mutableStateOf(false) }
     val today = LocalDate.now()
     LazyColumn(Modifier.fillMaxSize(), contentPadding=PaddingValues(20.dp), verticalArrangement=Arrangement.spacedBy(22.dp)) {
@@ -160,6 +165,21 @@ private fun HomeScreen(vm: MainViewModel, onGoals: () -> Unit, onHealthGuide: ()
         }
         item { GoalProgress(state.goals, state.total, onGoals) }
         item { ActivityCard(state.total.kcal, state.activity, syncing, onSync={ vm.syncHealth(force=true) }, onEdit={ manual=true }, onGuide=onHealthGuide) }
+        item {
+            OutlinedCard(shape=RectangleShape, border=BorderStroke(1.dp, Accent), modifier=Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(14.dp), verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween) {
+                        Text("今週の筋トレ", color=Accent)
+                        val monday=LocalDate.now().with(java.time.temporal.TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY))
+                        Text("${sessions.count { it.completed && !LocalDate.parse(it.date).isBefore(monday) }} / 2回", color=Accent)
+                    }
+                    Text(activeWorkout?.let { "実行中のワークアウトがあります" } ?: exercises.firstOrNull()?.let { "次は ${it.name}" } ?: "最初の種目を登録しましょう", color=Muted)
+                    LineButton(if(activeWorkout!=null) "ワークアウトに戻る" else "筋トレを始める", {
+                        if(activeWorkout!=null) onWorkout() else exercises.firstOrNull()?.let { vm.startWorkout(it.id,onWorkout) }
+                    }, Modifier.fillMaxWidth(), activeWorkout!=null || exercises.isNotEmpty())
+                }
+            }
+        }
         item {
             SectionTitle("今日の栄養素")
             nutrientSpecs.forEach { spec ->
@@ -238,6 +258,42 @@ private fun EntryRow(entry: EntryWithFood, onDelete: () -> Unit) {
         IconButton(onClick=onDelete) { Icon(Icons.Outlined.Close, "削除") }
     }
     HorizontalDivider(color=Rule)
+}
+
+@Composable
+private fun FoodAreaScreen(vm: MainViewModel, onNewFood: (String) -> Unit, onEdit: (FoodEntity) -> Unit) {
+    var section by rememberSaveable { mutableStateOf("記録") }
+    Column(Modifier.fillMaxSize()) {
+        Row(Modifier.fillMaxWidth().padding(horizontal=18.dp, vertical=8.dp), horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            LineButton("記録", {section="記録"}, Modifier.weight(1f).height(44.dp))
+            LineButton("食品", {section="食品"}, Modifier.weight(1f).height(44.dp))
+        }
+        if(section=="記録") LogScreen(vm,onNewFood) else FoodsScreen(vm,onEdit,{onNewFood("")})
+    }
+}
+
+@Composable
+private fun AnalysisAreaScreen(vm: MainViewModel) {
+    var section by rememberSaveable { mutableStateOf("筋トレ") }
+    Column(Modifier.fillMaxSize()) {
+        Row(Modifier.fillMaxWidth().padding(horizontal=18.dp, vertical=8.dp), horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            LineButton("筋トレ", {section="筋トレ"}, Modifier.weight(1f).height(44.dp))
+            LineButton("栄養", {section="栄養"}, Modifier.weight(1f).height(44.dp))
+        }
+        if(section=="筋トレ") WorkoutProgressScreen(vm) else HistoryScreen(vm)
+    }
+}
+
+@Composable
+private fun MoreAreaScreen(vm: MainViewModel, onGoals: () -> Unit, onHealthGuide: () -> Unit) {
+    var section by rememberSaveable { mutableStateOf("設定") }
+    Column(Modifier.fillMaxSize()) {
+        Row(Modifier.fillMaxWidth().padding(horizontal=18.dp, vertical=8.dp), horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            LineButton("設定", {section="設定"}, Modifier.weight(1f).height(44.dp))
+            LineButton("書き出し", {section="書き出し"}, Modifier.weight(1f).height(44.dp))
+        }
+        if(section=="書き出し") ExportScreen(vm) else WorkoutSettingsScreen(vm,onHealthGuide,onGoals)
+    }
 }
 
 @Composable
@@ -495,6 +551,7 @@ private fun ExportScreen(vm: MainViewModel) {
     var from by rememberSaveable { mutableStateOf(LocalDate.now().minusDays(6)) }
     var to by rememberSaveable { mutableStateOf(LocalDate.now()) }
     var markdown by rememberSaveable { mutableStateOf(true) }
+    var target by rememberSaveable { mutableStateOf("すべて") }
     var preview by remember { mutableStateOf("") }
     var bytes by remember { mutableStateOf(ByteArray(0)) }
     var pending by remember { mutableStateOf<Pair<String,ByteArray>?>(null) }
@@ -507,24 +564,41 @@ private fun ExportScreen(vm: MainViewModel) {
     val garminImport = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         uri?.let { context.contentResolver.openInputStream(it)?.bufferedReader()?.use { r -> vm.importGarminCsv(r.readText()) } }
     }
-    LaunchedEffect(from, to, markdown) {
-        if (!from.isAfter(to)) vm.export(from,to,markdown).let { preview=it.first; bytes=it.second }
+    LaunchedEffect(from, to, markdown, target) {
+        if (!from.isAfter(to)) {
+            val nutrition = vm.export(from,to,markdown)
+            val workout = vm.exportWorkout(from,to,markdown)
+            val result = when(target) {
+                "栄養" -> nutrition
+                "筋トレ" -> workout
+                else -> {
+                    if(markdown) {
+                        val text = nutrition.first + "\n\n---\n\n" + workout.first
+                        text to text.toByteArray()
+                    } else workout
+                }
+            }
+            preview=result.first; bytes=result.second
+        }
     }
     LazyColumn(Modifier.fillMaxSize(), contentPadding=PaddingValues(20.dp), verticalArrangement=Arrangement.spacedBy(14.dp)) {
         item { PageHeader("エクスポート"); Text("記録をファイルに出力し、チャットAIへ渡してフィードバックを得られます。", color=Muted, modifier=Modifier.padding(top=10.dp)) }
+        item { SectionTitle("出力対象"); Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            listOf("栄養","筋トレ","すべて").forEach { item -> LineButton(item, {target=item; if(item=="すべて") markdown=true}, Modifier.weight(1f).height(44.dp)) }
+        }; if(target=="すべて") Text("統合出力はMarkdown形式です。", color = Muted) }
         item { Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
             LineButton("開始日\n$from", { showDatePicker(context,from){from=it} }, Modifier.weight(1f))
             LineButton("終了日\n$to", { showDatePicker(context,to){to=it} }, Modifier.weight(1f))
         } }
         item { Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
             LineButton("Markdown (.md)", {markdown=true}, Modifier.weight(1f))
-            LineButton("CSV (Excel用)", {markdown=false}, Modifier.weight(1f))
+            LineButton("CSV (Excel用)", {if(target!="すべて") markdown=false}, Modifier.weight(1f), target!="すべて")
         } }
         item { Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween) { Text("プレビュー", color=Muted); Text("${preview.lineSequence().count()}行", color=Muted) } }
         item { OutlinedCard(shape=RectangleShape, border=BorderStroke(1.dp,Rule), modifier=Modifier.fillMaxWidth().height(300.dp)) { Text(preview, Modifier.padding(12.dp).verticalScroll(rememberScrollState())) } }
         item { Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
-            LineButton("ファイル保存", { val name="栄養記録_${from}_${to}.${if(markdown)"md" else "csv"}"; pending=name to bytes; saveLauncher.launch(name) }, Modifier.weight(1f))
-            LineButton("共有", { shareBytes(context, "栄養記録.${if(markdown)"md" else "csv"}", bytes, if(markdown)"text/markdown" else "text/csv") }, Modifier.weight(1f))
+            LineButton("ファイル保存", { val name="健康記録_${target}_${from}_${to}.${if(markdown)"md" else "csv"}"; pending=name to bytes; saveLauncher.launch(name) }, Modifier.weight(1f))
+            LineButton("共有", { shareBytes(context, "健康記録_${target}.${if(markdown)"md" else "csv"}", bytes, if(markdown)"text/markdown" else "text/csv") }, Modifier.weight(1f))
             LineButton("全文コピー", { (context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("栄養記録",preview)) }, Modifier.weight(1f))
         } }
         item { SectionTitle("バックアップと代替取込") }
