@@ -267,60 +267,266 @@ fun WorkoutSessionScreen(vm: MainViewModel, onBack: () -> Unit) {
         if (rest > 0) { delay(1_000); rest-- }
         else if (rest == 0 && currentSets.isNotEmpty()) {
             val vibrator = context.getSystemService(Vibrator::class.java)
-            if (Build.VERSION.SDK_INT >= 26) vibrator?.vibrate(VibrationEffect.creatÛm=¶‰Ëkºwµç}ÉåM•ÑÌ¹½±±•ÑÍMÑ…Ñ” ¤(€€€Ù…°µ•ÑÉ¥Ì‰äÙ´¹‰½‘å5•ÑÉ¥Ì¹½±±•ÑÍMÑ…Ñ” ¤(€€€Ù…È‰½‘å=Á•¸‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡™…±Í”¤ô(€€€Ù…°‰åA…ÉĞ€ôÍ•ÑÌ¹É½ÕÁ¥¹	äì¥Ğ¹Á…ÉĞô¹•…¡½Õ¹Ğ ¤(€€€Ù…°±…Ñ•ÍÑá•É¥Í”€ôÍ•ÑÌ¹±…ÍÑ=É9Õ±°ì¥Ğ¹Õ¹¥Ğ€ôô€‰­œˆôü¹•á•É¥Í•%(€€€Ù…°½¹•I´€ôÍ•ÑÌ¹™¥±Ñ•Èì¥Ğ¹•á•É¥Í•%€ôô±…Ñ•ÍÑá•É¥Í”ô¹µ…Á9½Ñ9Õ±°ì]½É­½ÕÑ5…Ñ ¹•ÍÑ¥µ…Ñ•‘=¹•I•Á5…à¡¥Ğ¹İ•¥¡Ñ-œ°¥Ğ¹É•ÁÌ¤ô¹µ…á=É9Õ±° ¤(€€€1…éå½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…áM¥é” ¤°½¹Ñ•¹ÑA…‘‘¥¹œ€ôA…‘‘¥¹Y…±Õ•Ì Äà¹‘À¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄØ¹‘À¤¤ì(€€€€€€€¥Ñ•´ìQ•áĞ ‹¦Ëš6\ˆ°ÍÑå±”€ô5…Ñ•É¥…±Q¡•µ”¹ÑåÁ½É…Á¡ä¹¡•…‘±¥¹•1…É”¤ìQ•áĞ ‹š¾Sç
-/nãš&/¿¦;–:ï»¢«–"ƒGˆ°½±½È€ô5ÕÑ•¤ô(€€€€€€€¥Ñ•´ì	É…ÍÍ…ÉìQ•áĞ ‹š:£–ºhÅI4ˆ°½±½È€ô5ÕÑ•¤ìQ•áĞ¡½¹•I´ü¹±•Ğì€ˆ‘íáÁ½ÉÑ•È¹™µĞ¡¥Ğ¥ô­œˆô€üè€‹¢¢c¦2Ë–ú„ˆ°½±½È€ô•¹Ğ°™½¹ÑM¥é”€ô€ÌĞ¹ÍÀ¤ìQ•áĞ ‰Á±•ç–ò?ï¢»n»S£»šr–’Ÿ–ˆ°½±½È€ô5ÕÑ•°™½¹ÑM¥é”€ô€ÄÄ¹ÍÀ¤ôô(€€€€€€€¥Ñ•´ì	É…ÍÍ…ÉìQ•áĞ ‹Ş?s«—ó€ˆ°½±½È€ô5ÕÑ•¤ìQ•áĞ ˆ‘íáÁ½ÉÑ•È¹™µĞ¡Í•ÑÌ¹ÍÕµ=˜ì]½É­½ÕÑ5…Ñ ¹Ù½±Õµ”¡¥Ğ¹İ•¥¡Ñ-œ°¥Ğ¹É•ÁÌ¤ô¥ô­œˆ°½±½È€ô•¹Ğ°™½¹ÑM¥é”€ô€ÌÈ¹ÍÀ¤ôô(€€€€€€€¥Ñ•´ì]½É­½ÕÑM•Ñ¥½¹Q¥Ñ±” ‹¦£’ö7–"—
-ï#šVÀˆ¤ô(€€€€€€€¥Ñ•µÌ¡±¥ÍÑ=˜ ‹¢àˆ°€‹¢3’â´ˆ°€‹¢hˆ°€‹¢
-¤ˆ°€‹¢Tˆ°€‹’öO–æäˆ¤¤ìÁ…ÉĞ€´ø(€€€€€€€€€€€Ù…°½Õ¹Ğ€ô‰åA…ÉÑmÁ…ÉÑt€üè€À(€€€€€€€€€€€I½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°Ù•ÉÑ¥…±±¥¹µ•¹Ğ€ô±¥¹µ•¹Ğ¹•¹Ñ•ÉY•ÉÑ¥…±±ä¤ì(€€€€€€€€€€€€€€€Q•áĞ¡Á…ÉĞ°5½‘¥™¥•È¹İ¥‘Ñ  Ğà¹‘À¤°½±½È€ô5ÕÑ•¤(€€€€€€€€€€€€€€€	½à¡5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¹¡•¥¡Ğ ÄÈ¹‘À¤¹‰…­É½Õ¹¡IÕ±”°I½Õ¹‘•‘½É¹•ÉM¡…Á” È¹‘À¤¤¤ì(€€€€€€€€€€€€€€€€€€€	½à¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¡½Õ¹Ğ€¼€ÄÙ˜¤¹½•É•%¸ Á˜°€Å˜¤¤¹¡•¥¡Ğ ÄÈ¹‘À¤¹‰…­É½Õ¹¡¥˜€¡½Õ¹Ğ¥¸€Ø¸¸ÄÈ¤•¹Ğ•±Í”5ÕÑ•°I½Õ¹‘•‘½É¹•ÉM¡…Á” È¹‘À¤¤¤(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€Q•áĞ¡½Õ¹Ğ¹Ñ½MÑÉ¥¹œ ¤°5½‘¥™¥•È¹İ¥‘Ñ  ÌØ¹‘À¤°Ñ•áÑ±¥¸€ôQ•áÑ±¥¸¹¹°½±½È€ô¥˜€¡½Õ¹Ğ¥¸€Ø¸¸ÄÈ¤•¹Ğ•±Í”5ÕÑ•¤(€€€€€€€€€€€ô(€€€€€€€ô(€€€€€€€¥Ñ•´ì	É…ÍÍ…ÉìQ•áĞ ‹/
-'ƒ»¢¢c¦2Èˆ°½±½È€ô5ÕÑ•¤ìÙ…°±…Ñ•ÍĞ€ôµ•ÑÉ¥Ì¹±…ÍÑ=É9Õ±° ¤ìQ•áĞ¡±…Ñ•ÍĞü¹İ•¥¡Ñ-œü¹±•Ğì€‹’öO¦4€‘íáÁ½ÉÑ•È¹™µĞ¡¥Ğ¥õ­œˆô€üè€‹ûƒ¢¢c¦2Ë3
-+ûo
-Lˆ¤ì1¥¹•	ÕÑÑ½¸ ‹’î+š^—»’öO¦7ï–F£–ú
-K¢¢c¦2Èˆ°ì‰½‘å=Á•¸€ôÑÉÕ”ô°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹Á…‘‘¥¹œ¡Ñ½À€ô€ÄÀ¹‘À¤¤ôô(€€€ô(€€€¥˜€¡‰½‘å=Á•¸¤	½‘å5•ÑÉ¥¥…±½œ¡Ù´¤ì‰½‘å=Á•¸€ô™…±Í”ô)ô()½µÁ½Í…‰±”)™Õ¸]½É­½ÕÑM•ÑÑ¥¹ÍMÉ••¸¡Ù´è5…¥¹Y¥•İ5½‘•°°½¹!•…±Ñ¡Õ¥‘”è€ ¤€´øU¹¥Ğ°½¹½…±Ìè€ ¤€´øU¹¥Ğ¤ì(€€€Ù…°Í•ÑÑ¥¹Ì‰äÙ´¹İ½É­½ÕÑM•ÑÑ¥¹Ì¹½±±•ÑÍMÑ…Ñ” ¤(€€€Ù…°¡½µ”‰äÙ´¹¡½µ”¹½±±•ÑÍMÑ…Ñ” ¤(€€€™Õ¸Í•ÑÑ¥¹œ¡­•äèMÑÉ¥¹œ°™…±±‰…¬èMÑÉ¥¹œ¤€ôÍ•ÑÑ¥¹Ì¹™¥ÉÍÑ=É9Õ±°ì¥Ğ¹­•ä€ôô­•äôü¹Ù…±Õ”€üè™…±±‰…¬(€€€Ù…È½…°‰äÉ•µ•µ‰•È¡Í•ÑÑ¥¹Ì¤ìµÕÑ…‰±•MÑ…Ñ•=˜¡Í•ÑÑ¥¹œ ‰İ••­½…°ˆ°€ˆÈˆ¤¤ô(€€€Ù…ÈÉ•ÍĞ‰äÉ•µ•µ‰•È¡Í•ÑÑ¥¹Ì¤ìµÕÑ…‰±•MÑ…Ñ•=˜¡Í•ÑÑ¥¹œ ‰É•ÍÑM•½¹‘Ìˆ°€ˆäÀˆ¤¤ô(€€€Ù…ÈÍÑ•À‰äÉ•µ•µ‰•È¡Í•ÑÑ¥¹Ì¤ìµÕÑ…‰±•MÑ…Ñ•=˜¡Í•ÑÑ¥¹œ ‰‘•™…Õ±ÑMÑ•Á-œˆ°€ˆÈ¸Ôˆ¤¤ô(€€€1…éå½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…áM¥é” ¤°½¹Ñ•¹ÑA…‘‘¥¹œ€ôA…‘‘¥¹Y…±Õ•Ì Äà¹‘À¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄĞ¹‘À¤¤ì(€€€€€€€¥Ñ•´ìQ•áĞ ‹¢¢·–ºkï¢¢c¦2Èˆ°ÍÑå±”€ô5…Ñ•É¥…±Q¡•µ”¹ÑåÁ½É…Á¡ä¹¡•…‘±¥¹•1…É”¤ô(€€€€€€€¥Ñ•´ì	É…ÍÍ…ÉìQ•áĞ ‹’î+š^—»
-ÏÏ
-
-ßŸÌˆ°½±½È€ô5ÕÑ•¤ìQ•áĞ ‹v‡r€€€‘í¡½µ”¹…Ñ¥Ù¥Ñäü¹Í±••Á5¥¹ÕÑ•Ìü¹±•Ğì€ˆ‘í¥Ğ€¼€ØÁôè‘ì¡¥Ğ€”€ØÀ¤¹Ñ½MÑÉ¥¹œ ¤¹Á…‘MÑ…ÉĞ È°€œÀœ¥ôˆô€üè€‹ŠP‰ôˆ°™½¹ÑM¥é”€ô€ÈÀ¹ÍÀ¤ìQ•áĞ ‹
-ÿÏG
-¿¢Î¨€€‘íáÁ½ÉÑ•È¹™µĞ¡¡½µ”¹Ñ½Ñ…°¹ÁÉ½Ñ•¥¸¥õœˆ°™½¹ÑM¥é”€ô€ÈÀ¹ÍÀ¤ìQ•áĞ ‹v‡rƒ½!•…±Ñ ½¹¹•Ó
-ÿÏG
-¿¢Î«¿¦’ê/¢¢c¦2Ë/
-'¢«–.W¦n¢¢#_ûgˆ°½±½È€ô5ÕÑ•°™½¹ÑM¥é”€ô€ÄÄ¹ÍÀ¤ôô(€€€€€€€¥Ñ•´ìM•ÑÑ¥¹9Õµ‰•È ‹¦Ç»n»š¢g–n{šVÀˆ°½…°°€‹–nxˆ¤ì½…°€ô¥ĞìÙ´¹ÕÁ‘…Ñ•]½É­½ÕÑM•ÑÑ¥¹œ ‰İ••­½…°ˆ°¥Ğ¤ôô(€€€€€€€¥Ñ•´ìM•ÑÑ¥¹9Õµ‰•È ‹
-“Ï
-ÿóC¯–"wšr–ˆ°É•ÍĞ°€‹Hˆ¤ìÉ•ÍĞ€ô¥ĞìÙ´¹ÕÁ‘…Ñ•]½É­½ÕÑM•ÑÑ¥¹œ ‰É•ÍÑM•½¹‘Ìˆ°¥Ğ¤ôô(€€€€€€€¥Ñ•´ìM•ÑÑ¥¹9Õµ‰•È ‹¦7¦?»–"ïÿ¾ò#š^‹–ºk¾ò$ˆ°ÍÑ•À°€‰­œˆ¤ìÍÑ•À€ô¥ĞìÙ´¹ÕÁ‘…Ñ•]½É­½ÕÑM•ÑÑ¥¹œ ‰‘•™…Õ±ÑMÑ•Á-œˆ°¥Ğ¤ôô(€€€€€€€¥Ñ•´ì1¥¹•	ÕÑÑ½¸ ‹š‚¦’+n»š¢g
-KŞ£¦nˆ°½¹½…±Ì°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹¡•¥¡Ğ ÔÈ¹‘À¤¤ô(€€€€€€€¥Ñ•´ì1¥¹•	ÕÑÑ½¸ ‰!•…±Ñ ½¹¹•Ó¢¢·–ºhˆ°½¹!•…±Ñ¡Õ¥‘”°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹¡•¥¡Ğ ÔÈ¹‘À¤¤ìQ•áĞ ‹’î[’êë£»š¾S¢òï§Ï
-·Ï
-Ã¿¢†3ûo
-Oˆ°½±½È€ô5ÕÑ•°™½¹ÑM¥é”€ô€ÄÄ¹ÍÀ°µ½‘¥™¥•È€ô5½‘¥™¥•È¹Á…‘‘¥¹œ¡Ñ½À€ô€à¹‘À¤¤ô(€€€ô)ô()=ÁÑ%¸¡áÁ•É¥µ•¹Ñ…±5…Ñ•É¥…°ÍÁ¤èé±…ÍÌ¤)½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸9•İá•É¥Í•M¡••Ğ¡Ù´è5…¥¹Y¥•İ5½‘•°°½¹¥Íµ¥ÍÌè€ ¤€´øU¹¥Ğ°½¹M…Ù•è€¡1½¹œ¤€´øU¹¥Ğ¤ì(€€€Ù…È¹…µ”‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ô(€€€Ù…ÈÁ…ÉĞ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ‹¢àˆ¤ô(€€€Ù…ÈÕ¹¥Ğ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ‰­œˆ¤ô(€€€Ù…ÈÍÑ•À‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ È¸Ô¤ô(€€€Ù…È¹½Ñ”‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ô(€€€Ù…È•±…ÁÍ•‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•1½¹MÑ…Ñ•=˜ À¤ô(€€€1…Õ¹¡•‘™™•Ğ¡U¹¥Ğ¤ìİ¡¥±”€¡ÑÉÕ”¤ì‘•±…ä Å|ÀÀÀ¤ì•±…ÁÍ•¬¬ôô(€€€5½‘…±	½ÑÑ½µM¡••Ğ¡½¹¥Íµ¥ÍÍI•ÅÕ•ÍĞ€ô½¹¥Íµ¥ÍÌ°½¹Ñ…¥¹•É½±½È€ô½±½È ÁáÅÄàÄÔ¤¤ì(€€€€€€€½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹Ù•ÉÑ¥…±MÉ½±°¡É•µ•µ‰•ÉMÉ½±±MÑ…Ñ” ¤¤¹Á…‘‘¥¹œ Äà¹‘À¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄÈ¹‘À¤¤ì(€€€€€€€€€€€I½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹MÁ…•	•Ñİ••¸¤ìQ•áĞ ‹šZÃ_¢»n¸ˆ°™½¹ÑM¥é”€ô€Èà¹ÍÀ¤ìQ•áĞ ˆ‘í•±…ÁÍ•‘÷KÖ3¦8ˆ°½±½È€ô•¹Ğ¤ô(€€€€€€€€€€€Q•áĞ ‹–B7–&73–"/
-'«?™=/£ŸnÓoûgˆ°½±½È€ô5ÕÑ•¤(€€€€€€€€€€€=ÕÑ±¥¹•‘Q•áÑ¥•±¡¹…µ”°ì¹…µ”€ô¥Ğô°Á±…•¡½±‘•È€ôìQ•áĞ ‹¢»n»–B4ˆ¤ô°µ½‘¥™¥•È€ô5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤(€€€€€€€€€€€I½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Ø¹‘À¤¤ì±¥ÍÑ=˜ ‹¢ã»{
-ßÍˆ°€‹¢3’â·»{
-ßÍˆ°€‹¢k»{
-ßÍˆ¤¹™½É… ì±…‰•°€´ø¥±Ñ•É¡¥À¡™…±Í”°ì¹…µ”€ô±…‰•°ìÁ…ÉĞ€ô±…‰•°¹Ñ…­•]¡¥±”ì¥Ğ€„ô€Ÿ¸œôô°ìQ•áĞ¡±…‰•°°™½¹ÑM¥é”€ô€ÄÀ¹ÍÀ¤ô¤ôô(€€€€€€€€€€€Q•áĞ ‹¦£’ö7
-ÿ
-Àˆ°½±½È€ô5ÕÑ•¤(€€€€€€€€€€€I½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Ô¹‘À¤¤ì±¥ÍÑ=˜ ‹¢àˆ°€‹¢3’â´ˆ°€‹¢hˆ°€‹¢
-¤ˆ°€‹¢Tˆ°€‹’öO–æäˆ¤¹™½É… ì±…‰•°€´ø¥±Ñ•É¡¥À¡Á…ÉĞ€ôô±…‰•°°ìÁ…ÉĞ€ô±…‰•°ô°ìQ•áĞ¡±…‰•°¤ô¤ôô(€€€€€€€€€€€Q•áĞ ‹¢¢c¦2Ë
-ÿ
-“\€¼ƒ¦7¦?»–"ïüˆ°½±½È€ô5ÕÑ•¤(€€€€€€€€€€€I½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Ô¹‘À¤¤ì(€€€€€€€€€€€€€€€±¥ÍÑ=˜ Ä¸À°€È¸Ô°€Ô¸À¤¹™½É… ìÙ…±Õ”€´ø¥±Ñ•É¡¥À¡Õ¹¥Ğ€ôô€‰­œˆ€˜˜ÍÑ•À€ôôÙ…±Õ”°ìÕ¹¥Ğ€ô€‰­œˆìÍÑ•À€ôÙ…±Õ”ô°ìQ•áĞ ˆ‘íáÁ½ÉÑ•È¹™µĞ¡Ù…±Õ”¥õ­œˆ¤ô¤ô(€€€€€€€€€€€€€€€¥±Ñ•É¡¥À¡Õ¹¥Ğ€ôô€‰‰Üˆ°ìÕ¹¥Ğ€ô€‰‰Üˆô°ìQ•áĞ ‹¢«¦4ˆ¤ô¤(€€€€€€€€€€€€€€€¥±Ñ•É¡¥À¡Õ¹¥Ğ€ôô€‰Í•Œˆ°ìÕ¹¥Ğ€ô€‰Í•Œˆô°ìQ•áĞ ‹KšVÀˆ¤ô¤(€€€€€€€€€€€ô(€€€€€€€€€€€=ÕÑ±¥¹•‘Q•áÑ¥•±¡¹½Ñ”°ì¹½Ñ”€ô¥Ğô°Á±…•¡½±‘•È€ôìQ•áĞ ‹‡‹¾ò#
-ßó#’ö7ö»SÏ’ö7ö»«§¾ò$ˆ¤ô°µ½‘¥™¥•È€ô5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹¡•¥¡Ğ äÀ¹‘À¤¤(€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‹fï¦2Ë_›gC¦Z/–,ˆ°ìÙ´¹…‘‘]½É­½ÕÑá•É¥Í”¡¹…µ”°Á…ÉĞ°Õ¹¥Ğ°ÍÑ•À°¹½Ñ”°½¹M…Ù•¤ô°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹¡•¥¡Ğ ØĞ¹‘À¤¤(€€€€€€€€€€€Q•áÑ	ÕÑÑ½¸¡½¹±¥¬€ô½¹¥Íµ¥ÍÌ°µ½‘¥™¥•È€ô5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ìQ•áĞ ‹
-
-
-,ˆ¤ô(€€€€€€€ô(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸I•¹…µ•¥…±½œ¡•á•É¥Í”è]½É­½ÕÑá•É¥Í•¹Ñ¥Ñä°½¹¥Íµ¥ÍÌè€ ¤€´øU¹¥Ğ°½¹M…Ù”è€¡MÑÉ¥¹œ¤€´øU¹¥Ğ¤ì(€€€Ù…ÈÙ…±Õ”‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡•á•É¥Í”¹¹…µ”¤ô(€€€±•ÉÑ¥…±½œ¡½¹¥Íµ¥ÍÍI•ÅÕ•ÍĞ€ô½¹¥Íµ¥ÍÌ°Ñ¥Ñ±”€ôìQ•áĞ ‹–B7–&7
-K–’'šnĞˆ¤ô°Ñ•áĞ€ôì½±Õµ¸ìQ•áĞ ‹¦;–:ï»¢¢c¦2Ë
-gç›šZÃ_–B7–&7¯–òW7Úg3
-3ûgˆ°½±½È€ô5ÕÑ•¤ì=ÕÑ±¥¹•‘Q•áÑ¥•±¡Ù…±Õ”°ìÙ…±Õ”€ô¥Ğô°µ½‘¥™¥•È€ô5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ôô°½¹™¥Éµ	ÕÑÑ½¸€ôìQ•áÑ	ÕÑÑ½¸¡½¹±¥¬€ôì½¹M…Ù”¡Ù…±Õ”¤ô¤ìQ•áĞ ‹–’'šnÓg
-,ˆ¤ôô°‘¥Íµ¥ÍÍ	ÕÑÑ½¸€ôìQ•áÑ	ÕÑÑ½¸¡½¹±¥¬€ô½¹¥Íµ¥ÍÌ¤ìQ•áĞ ‹
-·Ï
-ï¬ˆ¤ôô¤)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸5•É•¥…±½œ¡Í½ÕÉ”è]½É­½ÕÑá•É¥Í•¹Ñ¥Ñä°Ñ…É•ÑÌè1¥ÍĞñ]½É­½ÕÑá•É¥Í•¹Ñ¥Ñäø°½¹¥Íµ¥ÍÌè€ ¤€´øU¹¥Ğ°½¹5•É”è€¡1½¹œ¤€´øU¹¥Ğ¤ì(€€€Ù…ÈÑ…É•Ğ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ñ1½¹œüø¡¹Õ±°¤ô(€€€±•ÉÑ¥…±½œ¡½¹¥Íµ¥ÍÍI•ÅÕ•ÍĞ€ô½¹¥Íµ¥ÍÌ°Ñ¥Ñ±”€ôìQ•áĞ ‹¢»n»
-KÖÇ–B ˆ¤ô°Ñ•áĞ€ôì½±Õµ¸ìQ•áĞ ˆ‘íÍ½ÕÉ”¹¹…µ•÷
-K’â/»§
-3/¯–B#
-?oûgˆ°½±½È€ô5ÕÑ•¤ìÑ…É•ÑÌ¹™½É… ì¥Ñ•´€´ø¥±Ñ•É¡¥À¡Ñ…É•Ğ€ôô¥Ñ•´¹¥°ìÑ…É•Ğ€ô¥Ñ•´¹¥ô°ìQ•áĞ ˆ‘í¥Ñ•´¹¹…µ•÷ì‘í¥Ñ•´¹Á…ÉÑôˆ¤ô°µ½‘¥™¥•È€ô5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ôôô°½¹™¥Éµ	ÕÑÑ½¸€ôìQ•áÑ	ÕÑÑ½¸¡½¹±¥¬€ôìÑ…É•Ğü¹±•Ğ¡½¹5•É”¤ô°•¹…‰±•€ôÑ…É•Ğ€„ô¹Õ±°¤ìQ•áĞ ‹ÖÇ–B#g
-,ˆ¤ôô°‘¥Íµ¥ÍÍ	ÕÑÑ½¸€ôìQ•áÑ	ÕÑÑ½¸¡½¹±¥¬€ô½¹¥Íµ¥ÍÌ¤ìQ•áĞ ‹
-·Ï
-ï¬ˆ¤ôô¤)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸	½‘å5•ÑÉ¥¥…±½œ¡Ù´è5…¥¹Y¥•İ5½‘•°°½¹¥Íµ¥ÍÌè€ ¤€´øU¹¥Ğ¤ì(€€€Ù…Èİ•¥¡Ğ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ôìÙ…È™…Ğ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ôìÙ…È…É´‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ôìÙ…È¡•ÍĞ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ôìÙ…Èİ…¥ÍĞ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ôìÙ…ÈÑ¡¥ ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ô(€€€±•ÉÑ¥…±½œ¡½¹¥Íµ¥ÍÍI•ÅÕ•ÍĞ€ô½¹¥Íµ¥ÍÌ°Ñ¥Ñ±”€ôìQ•áĞ ‹/
-'ƒ»¢¢c¦2Èˆ¤ô°Ñ•áĞ€ôì½±Õµ¸¡5½‘¥™¥•È¹Ù•ÉÑ¥…±MÉ½±°¡É•µ•µ‰•ÉMÉ½±±MÑ…Ñ” ¤¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Ø¹‘À¤¤ì±¥ÍÑ=˜ ‹’öO¦5­œˆÑ¼İ•¥¡Ğ°€‹’öO¢¢
-«:”ˆÑ¼™…Ğ°€‹¢U´ˆÑ¼…É´°€‹¢á´ˆÑ¼¡•ÍĞ°€‹¢ç–nÉ´ˆÑ¼İ…¥ÍĞ°€‹–’«
-
-	´ˆÑ¼Ñ¡¥ ¤¹™½É…¡%¹‘•á•ì¥¹‘•à°Á…¥È€´ø=ÕÑ±¥¹•‘Q•áÑ¥•±¡Á…¥È¹Í•½¹°ìØ€´øİ¡•¸¡¥¹‘•à¥ìÀ´ùİ•¥¡ĞõØìÄ´ù™…ĞõØìÈ´ù…É´õØìÌ´ù¡•ÍĞõØìĞ´ùİ…¥ÍĞõØí•±Í”´ùÑ¡¥ õÙôô°±…‰•°€ôìQ•áĞ¡Á…¥È¹™¥ÉÍĞ¤ô°µ½‘¥™¥•È€ô5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ôôô°½¹™¥Éµ	ÕÑÑ½¸€ôìQ•áÑ	ÕÑÑ½¸¡½¹±¥¬€ôìÙ´¹Í…Ù•	½‘å5•ÑÉ¥Œ¡	½‘å5•ÑÉ¥¹Ñ¥Ñä¡1½…±…Ñ”¹¹½Ü ¤¹Ñ½MÑÉ¥¹œ ¤°İ•¥¡Ğ¹Ñ½½Õ‰±•=É9Õ±° ¤°™…Ğ¹Ñ½½Õ‰±•=É9Õ±° ¤°…É´¹Ñ½½Õ‰±•=É9Õ±° ¤°¡•ÍĞ¹Ñ½½Õ‰±•=É9Õ±° ¤°İ…¥ÍĞ¹Ñ½½Õ‰±•=É9Õ±° ¤°Ñ¡¥ ¹Ñ½½Õ‰±•=É9Õ±° ¤¤¤ì½¹¥Íµ¥ÍÌ ¤ô¤ìQ•áĞ ‹’şw–¶`ˆ¤ôô°‘¥Íµ¥ÍÍ	ÕÑÑ½¸€ôìQ•áÑ	ÕÑÑ½¸¡½¹±¥¬€ô½¹¥Íµ¥ÍÌ¤ìQ•áĞ ‹
-·Ï
-ï¬ˆ¤ôô¤)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸M•ÑQ…‰±”¡•á•É¥Í”è]½É­½ÕÑá•É¥Í•¹Ñ¥Ñä°Í•ÑÌè1¥ÍĞñ]½É­½ÕÑM•Ñ¹Ñ¥Ñäø°ÁÉ•Ù¥½ÕÌèá•É¥Í•1…ÍÑM•Ğü¤ì(€€€½±Õµ¸ì(€€€€€€€I½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹Á…‘‘¥¹œ à¹‘À¤¤ìQ•áĞ ‰MPˆ°5½‘¥™¥•È¹İ¥‘Ñ  ĞĞ¹‘À¤°½±½È€ô5ÕÑ•¤ìQ•áĞ ‹–&7–nxˆ°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤°½±½È€ô5ÕÑ•¤ìQ•áĞ ‹’î+–nxˆ°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤°½±½È€ô5ÕÑ•¤ìQ•áĞ ‰IAˆ°5½‘¥™¥•È¹İ¥‘Ñ  ĞÔ¹‘À¤°½±½È€ô5ÕÑ•¤ô(€€€€€€€Í•ÑÌ¹™½É… ìÍ•Ğ€´ø(€€€€€€€€€€€I½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹‰…­É½Õ¹¡¥˜€¡Í•Ğ¹¥ÍAÈ¤•¹Ğ¹½Áä¡…±Á¡„€ô€¸Àá˜¤•±Í”½±½È¹QÉ…¹ÍÁ…É•¹Ğ¤¹Á…‘‘¥¹œ¡Ù•ÉÑ¥…°€ô€ÄÈ¹‘À°¡½É¥é½¹Ñ…°€ô€à¹‘À¤°Ù•ÉÑ¥…±±¥¹µ•¹Ğ€ô±¥¹µ•¹Ğ¹•¹Ñ•ÉY•ÉÑ¥…±±ä¤ì(€€€€€€€€€€€€€€€Q•áĞ¡Í•Ğ¹Í•Ñ9¼¹Ñ½MÑÉ¥¹œ ¤°5½‘¥™¥•È¹İ¥‘Ñ  ĞĞ¹‘À¤°½±½È€ô¥˜€¡Í•Ğ¹¥ÍAÈ¤•¹Ğ•±Í”%¹¬¤(€€€€€€€€€€€€€€€Q•áĞ¡ÁÉ•Ù¥½ÕÍQ•áĞ¡ÁÉ•Ù¥½ÕÌ°•á•É¥Í”¹Õ¹¥Ğ¤°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤°½±½È€ô5ÕÑ•°™½¹ÑM¥é”€ô€ÄÈ¹ÍÀ¤(€€€€€€€€€€€€€€€Q•áĞ¡Í•ÑQ•áĞ¡Í•Ğ°•á•É¥Í”¹Õ¹¥Ğ¤°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤°½±½È€ô¥˜€¡Í•Ğ¹¥ÍAÈ¤•¹Ğ•±Í”%¹¬¤(€€€€€€€€€€€€€€€Q•áĞ¡Í•Ğ¹ÉÁ”ü¹Ñ½MÑÉ¥¹œ ¤€üè€‹ŠPˆ°5½‘¥™¥•È¹İ¥‘Ñ  ĞÔ¹‘À¤°Ñ•áÑ±¥¸€ôQ•áÑ±¥¸¹¹°½±½È€ô5ÕÑ•¤(€€€€€€€€€€€ô(€€€€€€€€€€€!½É¥é½¹Ñ…±¥Ù¥‘•È¡½±½È€ôIÕ±”¤(€€€€€€€ô(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸MÑ•ÁÁ•ÉA…¹•°¡±…‰•°èMÑÉ¥¹œ°Ù…±Õ”èMÑÉ¥¹œ°¡•±ÀèMÑÉ¥¹œ°µ¥¹ÕÌè€ ¤€´øU¹¥Ğ°Á±ÕÌè€ ¤€´øU¹¥Ğ°µ½‘¥™¥•Èè5½‘¥™¥•È¤ì(€€€=ÕÑ±¥¹•‘…É¡µ½‘¥™¥•È°‰½É‘•È€ô	½É‘•ÉMÑÉ½­” Ä¹‘À°IÕ±”¤°½±½ÉÌ€ô…É‘•™…Õ±ÑÌ¹½ÕÑ±¥¹•‘…É‘½±½ÉÌ¡½¹Ñ…¥¹•É½±½È€ô½±½È¹QÉ…¹ÍÁ…É•¹Ğ¤°Í¡…Á”€ô]½É­½ÕÑM¡…Á”¤ì(€€€€€€€½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹Á…‘‘¥¹œ ÄÀ¹‘À¤°¡½É¥é½¹Ñ…±±¥¹µ•¹Ğ€ô±¥¹µ•¹Ğ¹•¹Ñ•É!½É¥é½¹Ñ…±±ä¤ì(€€€€€€€€€€€Q•áĞ¡±…‰•°°½±½È€ô5ÕÑ•°™½¹ÑM¥é”€ô€ÄÄ¹ÍÀ¤(€€€€€€€€€€€Q•áĞ¡Ù…±Õ”°™½¹ÑM¥é”€ô€ÔÈ¹ÍÀ°™½¹Ñ…µ¥±ä€ô…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹Ñ•áĞ¹™½¹Ğ¹½¹Ñ…µ¥±ä¹M•É¥˜¤(€€€€€€€€€€€Q•áĞ¡¡•±À°½±½È€ô5ÕÑ•°™½¹ÑM¥é”€ô€ÄÀ¹ÍÀ¤(€€€€€€€€€€€I½Ü¡5½‘¥™¥•È¹Á…‘‘¥¹œ¡Ñ½À€ô€ÄÀ¹‘À¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä à¹‘À¤¤ì(€€€€€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‹Š"Hˆ°µ¥¹ÕÌ°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¹¡•¥¡Ğ ÔØ¹‘À¤¤(€€€€€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‹¾ò,ˆ°Á±ÕÌ°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¹¡•¥¡Ğ ÔØ¹‘À¤¤(€€€€€€€€€€€ô(€€€€€€€ô(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸M•ÑÑ¥¹9Õµ‰•È¡Ñ¥Ñ±”èMÑÉ¥¹œ°Ù…±Õ”èMÑÉ¥¹œ°ÍÕ™™¥àèMÑÉ¥¹œ°½¹M…Ù”è€¡MÑÉ¥¹œ¤€´øU¹¥Ğ¤ì(€€€	É…ÍÍ…ÉìQ•áĞ¡Ñ¥Ñ±”¤ìI½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹MÁ…•	•Ñİ••¸°Ù•ÉÑ¥…±±¥¹µ•¹Ğ€ô±¥¹µ•¹Ğ¹•¹Ñ•ÉY•ÉÑ¥…±±ä¤ìQ•áĞ ˆ‘Ù…±Õ”‘ÍÕ™™¥àˆ°½±½È€ô•¹Ğ°™½¹ÑM¥é”€ô€ÈĞ¹ÍÀ¤ìI½ÜìQ•áÑ	ÕÑÑ½¸¡½¹±¥¬€ôì½¹M…Ù”  ¡Ù…±Õ”¹Ñ½½Õ‰±•=É9Õ±° ¤€üè€Ä¸À¤€´¥˜€¡ÍÕ™™¥à€ôô€‰­œˆ¤€¸Ô•±Í”€Ä¸À¤¹½•É•Ñ1•…ÍĞ Ä¸À¤¹±•Ğ¡áÁ½ÉÑ•Èèé™µĞ¤¤ô¤ìQ•áĞ ‹Š"Hˆ¤ôìQ•áÑ	ÕÑÑ½¸¡½¹±¥¬€ôì½¹M…Ù”  ¡Ù…±Õ”¹Ñ½½Õ‰±•=É9Õ±° ¤€üè€Ä¸À¤€¬¥˜€¡ÍÕ™™¥à€ôô€‰­œˆ¤€¸Ô•±Í”€Ä¸À¤¹±•Ğ¡áÁ½ÉÑ•Èèé™µĞ¤¤ô¤ìQ•áĞ ‹¾ò,ˆ¤ôôôô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸á•É¥Í•MÑ…ÉÑ…É¡•á•É¥Í”è]½É­½ÕÑá•É¥Í•¹Ñ¥Ñä°±…ÍĞèá•É¥Í•1…ÍÑM•Ğü°½¹±¥¬è€ ¤€´øU¹¥Ğ¤ì(€€€=ÕÑ±¥¹•‘…É¡µ½‘¥™¥•È€ô5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹±¥­…‰±”¡½¹±¥¬€ô½¹±¥¬¤°‰½É‘•È€ô	½É‘•ÉMÑÉ½­” Ä¹‘À°IÕ±”¤°½±½ÉÌ€ô…É‘•™…Õ±ÑÌ¹½ÕÑ±¥¹•‘…É‘½±½ÉÌ¡½¹Ñ…¥¹•É½±½È€ô½±½È¹QÉ…¹ÍÁ…É•¹Ğ¤°Í¡…Á”€ô]½É­½ÕÑM¡…Á”¤ì(€€€€€€€I½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹Á…‘‘¥¹œ ÄÔ¹‘À¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹MÁ…•	•Ñİ••¸°Ù•ÉÑ¥…±±¥¹µ•¹Ğ€ô±¥¹µ•¹Ğ¹•¹Ñ•ÉY•ÉÑ¥…±±ä¤ì(€€€€€€€€€€€½±Õµ¸ìI½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä à¹‘À¤¤ìQ•áĞ¡•á•É¥Í”¹¹…µ”°™½¹ÑM¥é”€ô€ÄÜ¹ÍÀ¤ìQ•áĞ¡•á•É¥Í”¹Á…ÉĞ°½±½È€ô•¹Ğ°™½¹ÑM¥é”€ô€ÄÄ¹ÍÀ¤ôìQ•áĞ ‹–&7–nx€‘íÁÉ•Ù¥½ÕÍQ•áĞ¡±…ÍĞ°•á•É¥Í”¹Õ¹¥Ğ¥ôˆ°½±½È€ô5ÕÑ•¤ô(€€€€€€€€€€€	½à¡5½‘¥™¥•È¹Í¥é” Ğà¹‘À¤¹‰…­É½Õ¹¡½±½È¹QÉ…¹ÍÁ…É•¹Ğ°¥É±•M¡…Á”¤°½¹Ñ•¹Ñ±¥¹µ•¹Ğ€ô±¥¹µ•¹Ğ¹•¹Ñ•È¤ìQ•áĞ ‹ŠZØˆ°½±½È€ô•¹Ğ°™½¹ÑM¥é”€ô€Äà¹ÍÀ¤ô(€€€€€€€ô(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸	É…ÍÍ…É¡½¹Ñ•¹Ğè½µÁ½Í…‰±”½±Õµ¹M½Á”¸ ¤€´øU¹¥Ğ¤€ô=ÕÑ±¥¹•‘…É¡‰½É‘•È€ô	½É‘•ÉMÑÉ½­” Ä¹‘À°IÕ±”¤°½±½ÉÌ€ô…É‘•™…Õ±ÑÌ¹½ÕÑ±¥¹•‘…É‘½±½ÉÌ¡½¹Ñ…¥¹•É½±½È€ô½±½È¹QÉ…¹ÍÁ…É•¹Ğ¤°Í¡…Á”€ô]½É­½ÕÑM¡…Á”°µ½‘¥™¥•È€ô5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ì½±Õµ¸¡5½‘¥™¥•È¹Á…‘‘¥¹œ ÄĞ¹‘À¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹Ğ€ôÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Ø¹‘À¤°½¹Ñ•¹Ğ€ô½¹Ñ•¹Ğ¤ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸]½É­½ÕÑM•Ñ¥½¹Q¥Ñ±”¡Ñ•áĞèMÑÉ¥¹œ¤€ôQ•áĞ¡Ñ•áĞ°½±½È€ô•¹Ğ°™½¹ÑM¥é”€ô€ÄÈ¹ÍÀ°™½¹Ñ]•¥¡Ğ€ô½¹Ñ]•¥¡Ğ¹	½±¤()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸Mµ…±±5½‘•	ÕÑÑ½¸¡Ñ•áĞèMÑÉ¥¹œ°Í•±•Ñ•è	½½±•…¸°½¹±¥¬è€ ¤€´øU¹¥Ğ°µ½‘¥™¥•Èè5½‘¥™¥•È°•¹…‰±•è	½½±•…¸€ôÑÉÕ”¤€ô=ÕÑ±¥¹•‘	ÕÑÑ½¸¡½¹±¥¬€ô½¹±¥¬°µ½‘¥™¥•È€ôµ½‘¥™¥•È¹¡•¥¡Ğ ĞĞ¹‘À¤°•¹…‰±•€ô•¹…‰±•°Í¡…Á”€ô]½É­½ÕÑM¡…Á”°‰½É‘•È€ô	½É‘•ÉMÑÉ½­” Ä¹‘À°¥˜€¡Í•±•Ñ•¤•¹Ğ•±Í”IÕ±”¤°½±½ÉÌ€ô	ÕÑÑ½¹•™…Õ±ÑÌ¹½ÕÑ±¥¹•‘	ÕÑÑ½¹½±½ÉÌ¡½¹Ñ…¥¹•É½±½È€ô¥˜€¡Í•±•Ñ•¤•¹Ğ¹½Áä¡…±Á¡„€ô€¸ÄÉ˜¤•±Í”½±½È¹QÉ…¹ÍÁ…É•¹Ğ°½¹Ñ•¹Ñ½±½È€ô¥˜€¡Í•±•Ñ•¤•¹Ğ•±Í”%¹¬¤¤ìQ•áĞ¡Ñ•áĞ¤ô()ÁÉ¥Ù…Ñ”™Õ¸ÁÉ•Ù¥½ÕÍQ•áĞ¡ÁÉ•Ù¥½ÕÌèá•É¥Í•1…ÍÑM•Ğü°Õ¹¥ĞèMÑÉ¥¹œ¤€ôİ¡•¸€¡Õ¹¥Ğ¤ì€‰­œˆ€´ø¥˜€¡ÁÉ•Ù¥½ÕÌü¹İ•¥¡Ñ-œ€ôô¹Õ±°¤€‹¿c
-›»¢¢c¦2ËŸdˆ•±Í”€ˆ‘íáÁ½ÉÑ•È¹™µĞ¡ÁÉ•Ù¥½ÕÌ¹İ•¥¡Ñ-œ¥õ­œƒ\€‘íÁÉ•Ù¥½ÕÌ¹É•ÁÌ€üè€‹ŠP‰ôˆì€‰Í•Œˆ€´øÁÉ•Ù¥½ÕÌü¹Í•½¹‘Ìü¹±•Ğì€ˆ‘í¥Ñ÷Hˆô€üè€‹¿c
-›»¢¢c¦2ËŸdˆì•±Í”€´øÁÉ•Ù¥½ÕÌü¹É•ÁÌü¹±•Ğì€‹¢«¦4ƒ\€‘¥Ğˆô€üè€‹¿c
-›»¢¢c¦2ËŸdˆô)ÁÉ¥Ù…Ñ”™Õ¸ÁÉ•Ù¥½ÕÍY…±Õ”¡ÁÉ•Ù¥½ÕÌèá•É¥Í•1…ÍÑM•Ğü°Õ¹¥ĞèMÑÉ¥¹œ¤€ô¥˜€¡Õ¹¥Ğ€ôô€‰Í•Œˆ¤ÁÉ•Ù¥½ÕÌü¹Í•½¹‘Ìü¹Ñ½MÑÉ¥¹œ ¤€üè€‹ŠPˆ•±Í”ÁÉ•Ù¥½ÕÌü¹É•ÁÌü¹Ñ½MÑÉ¥¹œ ¤€üè€‹ŠPˆ)ÁÉ¥Ù…Ñ”™Õ¸Í•ÑQ•áĞ¡Í•Ğè]½É­½ÕÑM•Ñ¹Ñ¥Ñä°Õ¹¥ĞèMÑÉ¥¹œ¤€ôİ¡•¸€¡Õ¹¥Ğ¤ì€‰­œˆ€´ø€ˆ‘íÍ•Ğ¹İ•¥¡Ñ-œü¹±•Ğ¡áÁ½ÉÑ•Èèé™µĞ¤€üè€‹ŠP‰õ­œƒ\€‘íÍ•Ğ¹É•ÁÌ€üè€‹ŠP‰ôˆì€‰Í•Œˆ€´ø€ˆ‘íÍ•Ğ¹Í•½¹‘Ì€üè€‹ŠP‰÷Hˆì•±Í”€´ø€‹¢«¦4ƒ\€‘íÍ•Ğ¹É•ÁÌ€üè€‹ŠP‰ôˆô
+            if (Build.VERSION.SDK_INT >= 26) vibrator?.vibrate(VibrationEffect.createOneShot(250, VibrationEffect.DEFAULT_AMPLITUDE))
+            else @Suppress("DEPRECATION") vibrator?.vibrate(250)
+        }
+    }
+
+    LazyColumn(
+        Modifier.fillMaxSize(), contentPadding = PaddingValues(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        item {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                TextButton(onClick = onBack, modifier = Modifier.size(44.dp)) { Text("â†", fontSize = 24.sp) }
+                Column(Modifier.weight(1f)) {
+                    Text(current.name, fontSize = 22.sp)
+                    Text("${current.part}ãƒ»${if (current.unit == "kg") "ãƒã‚·ãƒ³" else "è‡ªé‡"}", color = Muted)
+                }
+            }
+        }
+        item {
+            BrassCard {
+                Text("å‰å›", color = Muted, fontSize = 10.sp)
+                Text(previousText(previous, current.unit), fontSize = 18.sp)
+            }
+        }
+        if (lastRecorded?.set?.isPr == true) item {
+            OutlinedCard(border = BorderStroke(1.dp, Accent), colors = CardDefaults.outlinedCardColors(containerColor = Accent.copy(alpha = .12f)), shape = WorkoutShape) {
+                Column(Modifier.padding(16.dp)) {
+                    Text("â†—  å‰å›è¶…ãˆ", color = Accent, fontSize = 28.sp)
+                    Text("éå»ã®è‡ªåˆ†ã‚’è¶…ãˆã¾ã—ãŸã€‚ã¡ã‚ƒã‚“ã¨å¼·ããªã£ã¦ã„ã¾ã™ã€‚", color = Muted)
+                }
+            }
+        }
+        item {
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                if (current.unit == "kg") StepperPanel("é‡é‡ KG", weight, "åˆ»ã¿ ${Exporter.fmt(current.stepKg)}kg", {
+                    weight = ((weight.toDoubleOrNull() ?: 0.0) - current.stepKg).coerceAtLeast(0.0).let(Exporter::fmt)
+                }, { weight = ((weight.toDoubleOrNull() ?: 0.0) + current.stepKg).let(Exporter::fmt) }, Modifier.weight(1f))
+                StepperPanel(if (current.unit == "sec") "ç§’æ•°" else "å›æ•°", if (current.unit == "sec") seconds else reps, "å‰å› ${previousValue(previous, current.unit)}", {
+                    if (current.unit == "sec") seconds = ((seconds.toIntOrNull() ?: 0) - 5).coerceAtLeast(0).toString()
+                    else reps = ((reps.toIntOrNull() ?: 0) - 1).coerceAtLeast(0).toString()
+                }, {
+                    if (current.unit == "sec") seconds = ((seconds.toIntOrNull() ?: 0) + 5).toString()
+                    else reps = ((reps.toIntOrNull() ?: 0) + 1).toString()
+                }, Modifier.weight(1f))
+            }
+        }
+        item {
+            OutlinedButton(
+                onClick = {
+                    vm.recordWorkoutSet(current, weight.toDoubleOrNull(), reps.toIntOrNull(), seconds.toIntOrNull())
+                    restTotal = settings.firstOrNull { it.key == "restSeconds" }?.value?.toIntOrNull() ?: 90
+                    rest = restTotal
+                },
+                border = BorderStroke(1.dp, Accent), shape = WorkoutShape,
+                colors = ButtonDefaults.outlinedButtonColors(containerColor = Accent.copy(alpha = .12f), contentColor = Accent),
+                modifier = Modifier.fillMaxWidth().height(76.dp),
+            ) { Text("âœ“  ã‚»ãƒƒãƒˆ${currentSets.size + 1}ã‚’è¨˜éŒ²", fontSize = 20.sp) }
+        }
+        if (rest > 0) item {
+            BrassCard {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text("ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«", color = Muted)
+                    Text("${rest / 60}:${(rest % 60).toString().padStart(2, '0')}", color = Accent, fontSize = 34.sp)
+                }
+                ProgressLine(if (restTotal == 0) 0f else rest / restTotal.toFloat())
+                Row(Modifier.padding(top = 10.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    LineButton("ï¼‹30ç§’", { rest += 30; restTotal += 30 }, Modifier.weight(1f).height(46.dp))
+                    LineButton("ã‚¹ã‚­ãƒƒãƒ—", { rest = 0 }, Modifier.weight(1f).height(46.dp))
+                }
+            }
+        }
+        if (lastRecorded != null) item {
+            BrassCard {
+                Text("è¿½ã„è¾¼ã¿åº¦ï¼ˆä»»æ„ãƒ»1ã‚¿ãƒƒãƒ—ï¼‰", color = Muted, fontSize = 11.sp)
+                Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    listOf(7 to "ã¾ã ä½™è£•", 8 to "ã¡ã‚‡ã†ã©", 9 to "é™ç•Œ").forEach { (rpe, label) ->
+                        OutlinedButton(onClick = { vm.setWorkoutRpe(lastRecorded!!.set, rpe) }, modifier = Modifier.weight(1f).height(54.dp), shape = WorkoutShape) {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) { Text(label, fontSize = 11.sp); Text("RPE $rpe", color = Accent, fontSize = 10.sp) }
+                        }
+                    }
+                }
+            }
+        }
+        item { SetTable(current, currentSets, previous) }
+        if (exercises.size > 1) item {
+            Text("ç¨®ç›®ã‚’è¿½åŠ ", color = Muted)
+            androidx.compose.foundation.lazy.LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                items(exercises.filter { it.id != current.id }) { exercise ->
+                    FilterChip(selected = false, onClick = { vm.switchWorkoutExercise(exercise.id) }, label = { Text(exercise.name) })
+                }
+            }
+        }
+        item {
+            OutlinedTextField(condition, { condition = it }, label = { Text("ä½“èª¿ãƒ¡ãƒ¢") }, placeholder = { Text("è‚©ãŒå°‘ã—é‡ã„ / ã‚ˆãçœ ã‚ŒãŸ ãªã©") }, modifier = Modifier.fillMaxWidth())
+            LineButton("çµ‚äº†ã—ã¦ä¿å­˜", { vm.completeWorkout(condition) { summary = true } }, Modifier.fillMaxWidth().height(58.dp))
+            Text("1ç¨®ç›®3ã‚»ãƒƒãƒˆã§ã‚‚ã€è¨˜éŒ²ã¯æ®‹ã‚Šã¾ã™ã€‚", color = Muted, fontSize = 11.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(top = 8.dp))
+        }
+    }
+    if (summary) AlertDialog(
+        onDismissRequest = {},
+        title = { Text("ä»Šæ—¥ã®è¨˜éŒ²ã‚’ä¿å­˜ã—ã¾ã—ãŸ") },
+        text = {
+            val volume = sets.sumOf { WorkoutMath.volume(it.weightKg, it.reps) }
+            Column { Text("ç·ãƒœãƒªãƒ¥ãƒ¼ãƒ  ${Exporter.fmt(volume)} kg", color = Accent); Text("å‰å›è¶…ãˆ ${sets.count { it.isPr }} ã‚»ãƒƒãƒˆ"); Text("éå»ã®è‡ªåˆ†ã¨ã®æ¯”è¼ƒã‚’ç©ã¿é‡ã­ã¾ã—ãŸã€‚", color = Muted) }
+        },
+        confirmButton = { TextButton(onClick = onBack) { Text("ãƒ›ãƒ¼ãƒ ã¸") } },
+    )
+}
+
+@Composable
+fun WorkoutProgressScreen(vm: MainViewModel) {
+    val sets by vm.workoutHistorySets.collectAsState()
+    val metrics by vm.bodyMetrics.collectAsState()
+    var bodyOpen by remember { mutableStateOf(false) }
+    val byPart = sets.groupingBy { it.part }.eachCount()
+    val latestExercise = sets.lastOrNull { it.unit == "kg" }?.exerciseId
+    val oneRm = sets.filter { it.exerciseId == latestExercise }.mapNotNull { WorkoutMath.estimatedOneRepMax(it.weightKg, it.reps) }.maxOrNull()
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        item { Text("é€²æ—", style = MaterialTheme.typography.headlineLarge); Text("æ¯”ã¹ã‚‹ç›¸æ‰‹ã¯ã€éå»ã®è‡ªåˆ†ã ã‘ã€‚", color = Muted) }
+        item { BrassCard { Text("æ¨å®š1RM", color = Muted); Text(oneRm?.let { "${Exporter.fmt(it)} kg" } ?: "è¨˜éŒ²å¾…ã¡", color = Accent, fontSize = 34.sp); Text("Epleyå¼ãƒ»ç¨®ç›®ã”ã¨ã®æœ€å¤§å€¤", color = Muted, fontSize = 11.sp) } }
+        item { BrassCard { Text("ç·ãƒœãƒªãƒ¥ãƒ¼ãƒ ", color = Muted); Text("${Exporter.fmt(sets.sumOf { WorkoutMath.volume(it.weightKg, it.reps) })} kg", color = Accent, fontSize = 32.sp) } }
+        item { WorkoutSectionTitle("éƒ¨ä½åˆ¥ã‚»ãƒƒãƒˆæ•°") }
+        items(listOf("èƒ¸", "èƒŒä¸­", "è„š", "è‚©", "è…•", "ä½“å¹¹")) { part ->
+            val count = byPart[part] ?: 0
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text(part, Modifier.width(48.dp), color = Muted)
+                Box(Modifier.weight(1f).height(12.dp).background(Rule, RoundedCornerShape(2.dp))) {
+                    Box(Modifier.fillMaxWidth((count / 16f).coerceIn(0f, 1f)).height(12.dp).background(if (count in 6..12) Accent else Muted, RoundedCornerShape(2.dp)))
+                }
+                Text(count.toString(), Modifier.width(36.dp), textAlign = TextAlign.End, color = if (count in 6..12) Accent else Muted)
+            }
+        }
+        item { BrassCard { Text("ã‹ã‚‰ã ã®è¨˜éŒ²", color = Muted); val latest = metrics.lastOrNull(); Text(latest?.weightKg?.let { "ä½“é‡ ${Exporter.fmt(it)}kg" } ?: "ã¾ã è¨˜éŒ²ãŒã‚ã‚Šã¾ã›ã‚“"); LineButton("ä»Šæ—¥ã®ä½“é‡ãƒ»å‘¨å¾„ã‚’è¨˜éŒ²", { bodyOpen = true }, Modifier.fillMaxWidth().padding(top = 10.dp)) } }
+    }
+    if (bodyOpen) BodyMetricDialog(vm) { bodyOpen = false }
+}
+
+@Composable
+fun WorkoutSettingsScreen(vm: MainViewModel, onHealthGuide: () -> Unit, onGoals: () -> Unit) {
+    val settings by vm.workoutSettings.collectAsState()
+    val home by vm.home.collectAsState()
+    fun setting(key: String, fallback: String) = settings.firstOrNull { it.key == key }?.value ?: fallback
+    var goal by remember(settings) { mutableStateOf(setting("weekGoal", "2")) }
+    var rest by remember(settings) { mutableStateOf(setting("restSeconds", "90")) }
+    var step by remember(settings) { mutableStateOf(setting("defaultStepKg", "2.5")) }
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(18.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        item { Text("è¨­å®šãƒ»è¨˜éŒ²", style = MaterialTheme.typography.headlineLarge) }
+        item { BrassCard { Text("ä»Šæ—¥ã®ã‚³ãƒ³ãƒ‡ã‚£ã‚·ãƒ§ãƒ³", color = Muted); Text("ç¡çœ   ${home.activity?.sleepMinutes?.let { "${it / 60}:${(it % 60).toString().padStart(2, '0')}" } ?: "â€”"}", fontSize = 20.sp); Text("ã‚¿ãƒ³ãƒ‘ã‚¯è³ª  ${Exporter.fmt(home.total.protein)}g", fontSize = 20.sp); Text("ç¡çœ ã¯Health Connectã€ã‚¿ãƒ³ãƒ‘ã‚¯è³ªã¯é£Ÿäº‹è¨˜éŒ²ã‹ã‚‰è‡ªå‹•é›†è¨ˆã—ã¾ã™ã€‚", color = Muted, fontSize = 11.sp) } }
+        item { SettingNumber("é€±ã®ç›®æ¨™å›æ•°", goal, "å›") { goal = it; vm.updateWorkoutSetting("weekGoal", it) } }
+        item { SettingNumber("ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«åˆæœŸå€¤", rest, "ç§’") { rest = it; vm.updateWorkoutSetting("restSeconds", it) } }
+        item { SettingNumber("é‡é‡ã®åˆ»ã¿ï¼ˆæ—¢å®šï¼‰", step, "kg") { step = it; vm.updateWorkoutSetting("defaultStepKg", it) } }
+        item { LineButton("æ „é¤Šç›®æ¨™ã‚’ç·¨é›†", onGoals, Modifier.fillMaxWidth().height(52.dp)) }
+        item { LineButton("Health Connectè¨­å®š", onHealthGuide, Modifier.fillMaxWidth().height(52.dp)); Text("ä»–äººã¨ã®æ¯”è¼ƒãƒ»ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã¯è¡Œã„ã¾ã›ã‚“ã€‚", color = Muted, fontSize = 11.sp, modifier = Modifier.padding(top = 8.dp)) }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun NewExerciseSheet(vm: MainViewModel, onDismiss: () -> Unit, onSaved: (Long) -> Unit) {
+    var name by remember { mutableStateOf("") }
+    var part by remember { mutableStateOf("èƒ¸") }
+    var unit by remember { mutableStateOf("kg") }
+    var step by remember { mutableStateOf(2.5) }
+    var note by remember { mutableStateOf("") }
+    var elapsed by remember { mutableLongStateOf(0) }
+    LaunchedEffect(Unit) { while (true) { delay(1_000); elapsed++ } }
+    ModalBottomSheet(onDismissRequest = onDismiss, containerColor = Color(0xFF1A1815)) {
+        Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) { Text("æ–°ã—ã„ç¨®ç›®", fontSize = 28.sp); Text("${elapsed}ç§’çµŒé", color = Accent) }
+            Text("åå‰ãŒåˆ†ã‹ã‚‰ãªãã¦OKã€‚ã‚ã¨ã§ç›´ã›ã¾ã™ã€‚", color = Muted)
+            OutlinedTextField(name, { name = it }, placeholder = { Text("ç¨®ç›®å") }, modifier = Modifier.fillMaxWidth())
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) { listOf("èƒ¸ã®ãƒã‚·ãƒ³A", "èƒŒä¸­ã®ãƒã‚·ãƒ³B", "è„šã®ãƒã‚·ãƒ³C").forEach { label -> FilterChip(false, { name = label; part = label.takeWhile { it != 'ã®' } }, { Text(label, fontSize = 10.sp) }) } }
+            Text("éƒ¨ä½ã‚¿ã‚°", color = Muted)
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) { listOf("èƒ¸", "èƒŒä¸­", "è„š", "è‚©", "è…•", "ä½“å¹¹").forEach { label -> FilterChip(part == label, { part = label }, { Text(label) }) } }
+            Text("è¨˜éŒ²ã‚¿ã‚¤ãƒ— / é‡é‡ã®åˆ»ã¿", color = Muted)
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                listOf(1.0, 2.5, 5.0).forEach { value -> FilterChip(unit == "kg" && step == value, { unit = "kg"; step = value }, { Text("${Exporter.fmt(value)}kg") }) }
+                FilterChip(unit == "bw", { unit = "bw" }, { Text("è‡ªé‡") })
+                FilterChip(unit == "sec", { unit = "sec" }, { Text("ç§’æ•°") })
+            }
+            OutlinedTextField(note, { note = it }, placeholder = { Text("ãƒ¡ãƒ¢ï¼ˆã‚·ãƒ¼ãƒˆä½ç½®ã€ãƒ”ãƒ³ä½ç½®ãªã©ï¼‰") }, modifier = Modifier.fillMaxWidth().height(90.dp))
+            LineButton("ç™»éŒ²ã—ã¦ã€ã™ãé–‹å§‹", { vm.addWorkoutExercise(name, part, unit, step, note, onSaved) }, Modifier.fillMaxWidth().height(64.dp))
+            TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) { Text("ã‚„ã‚ã‚‹") }
+        }
+    }
+}
+
+@Composable
+private fun RenameDialog(exercise: WorkoutExerciseEntity, onDismiss: () -> Unit, onSave: (String) -> Unit) {
+    var value by remember { mutableStateOf(exercise.name) }
+    AlertDialog(onDismissRequest = onDismiss, title = { Text("åå‰ã‚’å¤‰æ›´") }, text = { Column { Text("éå»ã®è¨˜éŒ²ã‚‚ã™ã¹ã¦æ–°ã—ã„åå‰ã«å¼•ãç¶™ãŒã‚Œã¾ã™ã€‚", color = Muted); OutlinedTextField(value, { value = it }, modifier = Modifier.fillMaxWidth()) } }, confirmButton = { TextButton(onClick = { onSave(value) }) { Text("å¤‰æ›´ã™ã‚‹") } }, dismissButton = { TextButton(onClick = onDismiss) { Text("ã‚­ãƒ£ãƒ³ã‚»ãƒ«") } })
+}
+
+@Composable
+private fun MergeDialog(source: WorkoutExerciseEntity, targets: List<WorkoutExerciseEntity>, onDismiss: () -> Unit, onMerge: (Long) -> Unit) {
+    var target by remember { mutableStateOf<Long?>(null) }
+    AlertDialog(onDismissRequest = onDismiss, title = { Text("ç¨®ç›®ã‚’çµ±åˆ") }, text = { Column { Text("${source.name}ã‚’ã€ä¸‹ã®ã©ã‚Œã‹ã«åˆã‚ã›ã¾ã™ã€‚", color = Muted); targets.forEach { item -> FilterChip(target == item.id, { target = item.id }, { Text("${item.name}ãƒ»${item.part}") }, modifier = Modifier.fillMaxWidth()) } } }, confirmButton = { TextButton(onClick = { target?.let(onMerge) }, enabled = target != null) { Text("çµ±åˆã™ã‚‹") } }, dismissButton = { TextButton(onClick = onDismiss) { Text("ã‚­ãƒ£ãƒ³ã‚»ãƒ«") } })
+}
+
+@Composable
+private fun BodyMetricDialog(vm: MainViewModel, onDismiss: () -> Unit) {
+    var weight by remember { mutableStateOf("") }; var fat by remember { mutableStateOf("") }; var arm by remember { mutableStateOf("") }; var chest by remember { mutableStateOf("") }; var waist by remember { mutableStateOf("") }; var thigh by remember { mutableStateOf("") }
+    AlertDialog(onDismissRequest = onDismiss, title = { Text("ã‹ã‚‰ã ã®è¨˜éŒ²") }, text = { Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(6.dp)) { listOf("ä½“é‡kg" to weight, "ä½“è„‚è‚ªç‡%" to fat, "è…•cm" to arm, "èƒ¸cm" to chest, "è…¹å›²cm" to waist, "å¤ªã‚‚ã‚‚cm" to thigh).forEachIndexed { index, pair -> OutlinedTextField(pair.second, { v -> when(index){0->weight=v;1->fat=v;2->arm=v;3->chest=v;4->waist=v;else->thigh=v} }, label = { Text(pair.first) }, modifier = Modifier.fillMaxWidth()) } } }, confirmButton = { TextButton(onClick = { vm.saveBodyMetric(BodyMetricEntity(LocalDate.now().toString(), weight.toDoubleOrNull(), fat.toDoubleOrNull(), arm.toDoubleOrNull(), chest.toDoubleOrNull(), waist.toDoubleOrNull(), thigh.toDoubleOrNull())); onDismiss() }) { Text("ä¿å­˜") } }, dismissButton = { TextButton(onClick = onDismiss) { Text("ã‚­ãƒ£ãƒ³ã‚»ãƒ«") } })
+}
+
+@Composable
+private fun SetTable(exercise: WorkoutExerciseEntity, sets: List<WorkoutSetEntity>, previous: ExerciseLastSet?) {
+    Column {
+        Row(Modifier.fillMaxWidth().padding(8.dp)) { Text("SET", Modifier.width(44.dp), color = Muted); Text("å‰å›", Modifier.weight(1f), color = Muted); Text("ä»Šå›", Modifier.weight(1f), color = Muted); Text("RPE", Modifier.width(45.dp), color = Muted) }
+        sets.forEach { set ->
+            Row(Modifier.fillMaxWidth().background(if (set.isPr) Accent.copy(alpha = .08f) else Color.Transparent).padding(vertical = 12.dp, horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Text(set.setNo.toString(), Modifier.width(44.dp), color = if (set.isPr) Accent else Ink)
+                Text(previousText(previous, exercise.unit), Modifier.weight(1f), color = Muted, fontSize = 12.sp)
+                Text(setText(set, exercise.unit), Modifier.weight(1f), color = if (set.isPr) Accent else Ink)
+                Text(set.rpe?.toString() ?: "â€”", Modifier.width(45.dp), textAlign = TextAlign.End, color = Muted)
+            }
+            HorizontalDivider(color = Rule)
+        }
+    }
+}
+
+@Composable
+private fun StepperPanel(label: String, value: String, help: String, minus: () -> Unit, plus: () -> Unit, modifier: Modifier) {
+    OutlinedCard(modifier, border = BorderStroke(1.dp, Rule), colors = CardDefaults.outlinedCardColors(containerColor = Color.Transparent), shape = WorkoutShape) {
+        Column(Modifier.fillMaxWidth().padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(label, color = Muted, fontSize = 11.sp)
+            Text(value, fontSize = 52.sp, fontFamily = androidx.compose.ui.text.font.FontFamily.Serif)
+            Text(help, color = Muted, fontSize = 10.sp)
+            Row(Modifier.padding(top = 10.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                LineButton("âˆ’", minus, Modifier.weight(1f).height(56.dp))
+                LineButton("ï¼‹", plus, Modifier.weight(1f).height(56.dp))
+            }
+        }
+    }
+}
+
+@Composable
+private fun SettingNumber(title: String, value: String, suffix: String, onSave: (String) -> Unit) {
+    BrassCard { Text(title); Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) { Text("$value$suffix", color = Accent, fontSize = 24.sp); Row { TextButton(onClick = { onSave(((value.toDoubleOrNull() ?: 1.0) - if (suffix == "kg") .5 else 1.0).coerceAtLeast(1.0).let(Exporter::fmt)) }) { Text("âˆ’") }; TextButton(onClick = { onSave(((value.toDoubleOrNull() ?: 1.0) + if (suffix == "kg") .5 else 1.0).let(Exporter::fmt)) }) { Text("ï¼‹") } } } }
+}
+
+@Composable
+private fun ExerciseStartCard(exercise: WorkoutExerciseEntity, last: ExerciseLastSet?, onClick: () -> Unit) {
+    OutlinedCard(modifier = Modifier.fillMaxWidth().clickable(onClick = onClick), border = BorderStroke(1.dp, Rule), colors = CardDefaults.outlinedCardColors(containerColor = Color.Transparent), shape = WorkoutShape) {
+        Row(Modifier.fillMaxWidth().padding(15.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Column { Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) { Text(exercise.name, fontSize = 17.sp); Text(exercise.part, color = Accent, fontSize = 11.sp) }; Text("å‰å› ${previousText(last, exercise.unit)}", color = Muted) }
+            Box(Modifier.size(48.dp).background(Color.Transparent, CircleShape), contentAlignment = Alignment.Center) { Text("â–¶", color = Accent, fontSize = 18.sp) }
+        }
+    }
+}
+
+@Composable
+private fun BrassCard(content: @Composable ColumnScope.() -> Unit) = OutlinedCard(border = BorderStroke(1.dp, Rule), colors = CardDefaults.outlinedCardColors(containerColor = Color.Transparent), shape = WorkoutShape, modifier = Modifier.fillMaxWidth()) { Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp), content = content) }
+
+@Composable
+private fun WorkoutSectionTitle(text: String) = Text(text, color = Accent, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+
+@Composable
+private fun SmallModeButton(text: String, selected: Boolean, onClick: () -> Unit, modifier: Modifier, enabled: Boolean = true) = OutlinedButton(onClick = onClick, modifier = modifier.height(44.dp), enabled = enabled, shape = WorkoutShape, border = BorderStroke(1.dp, if (selected) Accent else Rule), colors = ButtonDefaults.outlinedButtonColors(containerColor = if (selected) Accent.copy(alpha = .12f) else Color.Transparent, contentColor = if (selected) Accent else Ink)) { Text(text) }
+
+private fun previousText(previous: ExerciseLastSet?, unit: String) = when (unit) { "kg" -> if (previous?.weightKg == null) "ã¯ã˜ã‚ã¦ã®è¨˜éŒ²ã§ã™" else "${Exporter.fmt(previous.weightKg)}kg Ã— ${previous.reps ?: "â€”"}"; "sec" -> previous?.seconds?.let { "${it}ç§’" } ?: "ã¯ã˜ã‚ã¦ã®è¨˜éŒ²ã§ã™"; else -> previous?.reps?.let { "è‡ªé‡ Ã— $it" } ?: "ã¯ã˜ã‚ã¦ã®è¨˜éŒ²ã§ã™" }
+private fun previousValue(previous: ExerciseLastSet?, unit: String) = if (unit == "sec") previous?.seconds?.toString() ?: "â€”" else previous?.reps?.toString() ?: "â€”"
+private fun setText(set: WorkoutSetEntity, unit: String) = when (unit) { "kg" -> "${set.weightKg?.let(Exporter::fmt) ?: "â€”"}kg Ã— ${set.reps ?: "â€”"}"; "sec" -> "${set.seconds ?: "â€”"}ç§’"; else -> "è‡ªé‡ Ã— ${set.reps ?: "â€”"}" }

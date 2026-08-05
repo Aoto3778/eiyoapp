@@ -255,94 +255,370 @@ private fun EntryRow(entry: EntryWithFood, onDelete: () -> Unit) {
     Row(Modifier.fillMaxWidth().padding(vertical=6.dp), verticalAlignment=Alignment.CenterVertically) {
         Column(Modifier.width(58.dp)) { Text(entry.timestamp.localTime().format(DateTimeFormatter.ofPattern("HH:mm"))); Text(Exporter.timeBand(entry.timestamp.localTime().hour), color=Muted) }
         Column(Modifier.weight(1f)) { Text(entry.name); Text("Ã—${number(entry.amount)}${entry.unit}  ${number(entry.nutrients().kcal)} kcal", color=Muted) }
-        IconButton(onClick=onDelete) { Icon(Icons.OutlinßÍµ¶‰ËkºwµçAÑä ¤¤ô(€€€ôô(€€€1…éå½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…áM¥é” ¤°½¹Ñ•¹ÑA…‘‘¥¹œõA…‘‘¥¹Y…±Õ•Ì ÈÀ¹‘À¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄÀ¹‘À¤¤ì(€€€€€€€¥Ñ•´ìA…•!•…‘•È ‹n»š¢g¢¢·–ºhˆ°€‹–º3’êˆ°½¹	…¬¤ìQ•áĞ ˆÇš^—
-+»n»š¢g–“¦ëš²¯g
-/£n»š¢g«_¯«
-+ûg–’'šnÓ¿–6Ïšf’şw–¶cW
-3ûgˆ°½±½Èõ5ÕÑ•°µ½‘¥™¥•Èõ5½‘¥™¥•È¹Á…‘‘¥¹œ¡Ù•ÉÑ¥…°ôÄÈ¹‘À¤¤ô(€€€€€€€¥Ñ•µÌ¡¹ÕÑÉ¥•¹ÑMÁ•Ì¤ìÍÁ•Œ€´ø(€€€€€€€€€€€I½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°Ù•ÉÑ¥…±±¥¹µ•¹Ğõ±¥¹µ•¹Ğ¹•¹Ñ•ÉY•ÉÑ¥…±±ä°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄÈ¹‘À¤¤ì(€€€€€€€€€€€€€€€Q•áĞ¡ÍÁ•Œ¹±…‰•°°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¤(€€€€€€€€€€€€€€€A…Á•É¥•±¡Ù…±Õ•ÍmÍÁ•Œ¹­•åt¹½ÉµÁÑä ¤°ìÙ…±Õ”€´øÙ…±Õ•ÍmÍÁ•Œ¹­•åtõÙ…±Õ”¹™¥±Ñ•É9Õµ‰•È ¤ìÙ´¹Í•Ñ½…°¡ÍÁ•Œ¹­•ä°Ù…±Õ”¹Ñ½½Õ‰±•=É9Õ±° ¤ü¹Ñ½MÑÉ¥¹œ ¤¹½ÉµÁÑä ¤¤ô°5½‘¥™¥•È¹İ¥‘Ñ  ÄÈÀ¹‘À¤°Á±…•¡½±‘•Èô‹ŠPˆ¤(€€€€€€€€€€€€€€€Q•áĞ ˆ‘íÍÁ•Œ¹Õ¹¥Ñô¿š^”ˆ°½±½Èõ5ÕÑ•°µ½‘¥™¥•Èõ5½‘¥™¥•È¹İ¥‘Ñ  ØÈ¹‘À¤¤(€€€€€€€€€€€ô(€€€€€€€€€€€!½É¥é½¹Ñ…±¥Ù¥‘•È¡½±½ÈõIÕ±”¤(€€€€€€€ô(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸!¥ÍÑ½ÉåMÉ••¸¡Ù´è5…¥¹Y¥•İ5½‘•°¤ì(€€€Ù…°•¹ÑÉ¥•Ì‰äÙ´¹¡¥ÍÑ½Éä¹½±±•ÑÍMÑ…Ñ•]¥Ñ¡1¥™•å±” ¤(€€€Ù…°…Ñ¥Ù¥Ñ¥•Ì‰äÙ´¹¡¥ÍÑ½ÉåÑ¥Ù¥Ñ¥•Ì¹½±±•ÑÍMÑ…Ñ•]¥Ñ¡1¥™•å±” ¤(€€€Ù…È¹ÕÑÉ¥•¹Ğ‰äÉ•µ•µ‰•ÉM…Ù•…‰±”ìµÕÑ…‰±•MÑ…Ñ•=˜ ‰ÁÉ½Ñ•¥¸ˆ¤ô(€€€Ù…È‘…åÌ‰äÉ•µ•µ‰•ÉM…Ù•…‰±”ìµÕÑ…‰±•%¹ÑMÑ…Ñ•=˜ Ü¤ô(€€€Ù…°•¹€ô1½…±…Ñ”¹¹½Ü ¤ìÙ…°‘…Ñ•Ì€ô€¡‘…åÌ´Ä‘½İ¹Q¼€À¤¹µ…Àì•¹¹µ¥¹ÕÍ…åÌ¡¥Ğ¹Ñ½1½¹œ ¤¤ô(€€€Ù…°Ù…±Õ•Ì€ô‘…Ñ•Ì¹µ…Àì‘…Ñ”€´øáÁ½ÉÑ•È¹ÍÕ´¡•¹ÑÉ¥•Ì¹™¥±Ñ•Èì¥Ğ¹Ñ¥µ•ÍÑ…µÀ¹±½…±…Ñ” ¤ôõ‘…Ñ”ô¤¹Ù…±Õ”¡¹ÕÑÉ¥•¹Ğ¤ô(€€€Ù…°ÍÁ•Œ€ô¹ÕÑÉ¥•¹ÑMÁ•Ì¹™¥ÉÍĞí¥Ğ¹­•äôõ¹ÕÑÉ¥•¹Ñô(€€€Ù…°½…±Ì‰äÙ´¹½…±Ì¹½±±•ÑÍMÑ…Ñ•]¥Ñ¡1¥™•å±” ¤(€€€Ù…°½…°€ô½…±Ì¹™¥ÉÍÑ=É9Õ±°ì¥Ğ¹¹ÕÑÉ¥•¹Ñ-•äôõ¹ÕÑÉ¥•¹Ğôü¹Ñ…É•Ğ(€€€1…éå½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…áM¥é” ¤°½¹Ñ•¹ÑA…‘‘¥¹œõA…‘‘¥¹Y…±Õ•Ì ÈÀ¹‘À¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄØ¹‘À¤¤ì(€€€€€€€¥Ñ•´ìA…•!•…‘•È ‹š:£ìˆ¤ô(€€€€€€€¥Ñ•´ìI½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Ø¹‘À¤¤ì(€€€€€€€€€€€±¥ÍÑ=˜ ‰ÁÉ½Ñ•¥¸ˆ°‰ÍÕ…Èˆ°‰İ…Ñ•Èˆ°‰­…°ˆ°‰Í…±Ğˆ°‰™…Ğˆ¤¹™½É… ì­•ä€´ø(€€€€€€€€€€€€€€€Ù…°Ìõ¹ÕÑÉ¥•¹ÑMÁ•Ì¹™¥ÉÍĞí¥Ğ¹­•äôõ­•åôì1¥¹•	ÕÑÑ½¸¡Ì¹±…‰•°°í¹ÕÑÉ¥•¹Ğõ­•åô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¤(€€€€€€€€€€€ô(€€€€€€€ôô(€€€€€€€¥Ñ•´ìI½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä à¹‘À¤¤ì1¥¹•	ÕÑÑ½¸ ˆßš^”ˆ°í‘…åÌôİô¤ì1¥¹•	ÕÑÑ½¸ ˆÄÓš^”ˆ°í‘…åÌôÄÑô¤ôô(€€€€€€€¥Ñ•´ì	…É¡…ÉĞ¡‘…Ñ•Ì°Ù…±Õ•Ì°½…°¤ìI½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹MÁ…•	•Ñİ••¸¤ìQ•áĞ ‹¦;–:ì‘í‘…åÍ÷š^—¦ZOì‘íÍÁ•Œ¹±…‰•±ô€ ‘íÍÁ•Œ¹Õ¹¥Ñô¤ˆ°½±½Èõ5ÕÑ•¤ìQ•áĞ ‹–æÏ–v€‘í¹Õµ‰•È¡Ù…±Õ•Ì¹…Ù•É…” ¤¥ô€‘íÍÁ•Œ¹Õ¹¥Ñô¿š^”ˆ¤ôì½…°ü¹±•ĞìQ•áĞ ‹n»š¢dè€‘í¹Õµ‰•È¡¥Ğ¥ô€‘íÍÁ•Œ¹Õ¹¥Ñô¿š^”ˆ°½±½Èõ5ÕÑ•¤ôô(€€€€€€€¥Ñ•´ìM•Ñ¥½¹Q¥Ñ±” ‹šF–>X­…°ƒ£šÚ#¢Êì­…°ˆ¤ô(€€€€€€€¥Ñ•´ì(€€€€€€€€€€€‘…Ñ•Ì¹™½É… ì‘…Ñ”€´ø(€€€€€€€€€€€€€€€Ù…°¥¹Ñ…­”õáÁ½ÉÑ•È¹ÍÕ´¡•¹ÑÉ¥•Ì¹™¥±Ñ•Èí¥Ğ¹Ñ¥µ•ÍÑ…µÀ¹±½…±…Ñ” ¤ôõ‘…Ñ•ô¤¹­…°(€€€€€€€€€€€€€€€Ù…°‰ÕÉ¸õ…Ñ¥Ù¥Ñ¥•Ì¹™¥ÉÍÑ=É9Õ±°í¥Ğ¹‘…Ñ”ôõ‘…Ñ”¹Ñ½MÑÉ¥¹œ ¥ôü¹Ñ½Ñ…±…±½É¥•Í-…°(€€€€€€€€€€€€€€€I½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹Á…‘‘¥¹œ¡Ù•ÉÑ¥…°ôÔ¹‘À¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹MÁ…•	•Ñİ••¸¤ìQ•áĞ ˆ‘í‘…Ñ”¹µ½¹Ñ¡Y…±Õ•ô¼‘í‘…Ñ”¹‘…å=™5½¹Ñ¡ôˆ¤ìQ•áĞ ‹šF–>X€‘í¹Õµ‰•È¡¥¹Ñ…­”¥÷šÚ#¢Êì€‘í‰ÕÉ¸ü¹±•Ğ èé¹Õµ‰•È¤€üè€‹ŠP‰ôˆ¤ô(€€€€€€€€€€€ô(€€€€€€€ô(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸	…É¡…ÉĞ¡‘…Ñ•Ìè1¥ÍĞñ1½…±…Ñ”ø°Ù…±Õ•Ìè1¥ÍĞñ½Õ‰±”ø°½…°è½Õ‰±”ü¤ì(€€€Ù…°µ…á¥µÕ´€ôµ…á=˜¡Ù…±Õ•Ì¹µ…á=É9Õ±° ¤€üè€Ä¸À°½…°€üè€À¸À°€Ä¸À¤(€€€½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹¡•¥¡Ğ ÈĞÀ¹‘À¤¹Á…‘‘¥¹œ¡Ñ½ÀôÄÀ¹‘À¤¤ì(€€€€€€€I½Ü¡5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¹™¥±±5…á]¥‘Ñ  ¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Ø¹‘À¤°Ù•ÉÑ¥…±±¥¹µ•¹Ğõ±¥¹µ•¹Ğ¹	½ÑÑ½´¤ì(€€€€€€€€€€€Ù…±Õ•Ì¹™½É…¡%¹‘•á•ì¥¹‘•à°Ù…±Õ”€´ø(€€€€€€€€€€€€€€€½±Õµ¸¡5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤°¡½É¥é½¹Ñ…±±¥¹µ•¹Ğõ±¥¹µ•¹Ğ¹•¹Ñ•É!½É¥é½¹Ñ…±±ä°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹	½ÑÑ½´¤ì(€€€€€€€€€€€€€€€€€€€Q•áĞ¡¹Õµ‰•È¡Ù…±Õ”¤°½±½Èõ5ÕÑ•¤(€€€€€€€€€€€€€€€€€€€	½à¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¸ÜÕ˜¤¹™¥±±5…á!•¥¡Ğ ¡Ù…±Õ”½µ…á¥µÕ´¤¹Ñ½±½…Ğ ¤¹½•É•%¸ ¸ÀÉ˜°Å˜¤¤¹Ñ¡•¸¡5½‘¥™¥•È¤°½¹Ñ•¹Ñ±¥¹µ•¹Ğõ±¥¹µ•¹Ğ¹•¹Ñ•È¤ì(€€€€€€€€€€€€€€€€€€€€€€€…¹Ù…Ì¡5½‘¥™¥•È¹™¥±±5…áM¥é” ¤¤ì‘É…İI•Ğ¡¥˜¡¥¹‘•àôõÙ…±Õ•Ì¹±…ÍÑ%¹‘•à¤½±½È ÁáÉ	¤•±Í”½±½È¹QÉ…¹ÍÁ…É•¹Ğ¤ì‘É…İI•Ğ¡•¹Ğ°ÍÑå±”õMÑÉ½­”¡İ¥‘Ñ ôÄ¹‘À¹Ñ½Aà ¤¤¤ô(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô(€€€€€€€ô(€€€€€€€I½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Ø¹‘À¤¤ì‘…Ñ•Ì¹™½É… ìQ•áĞ ˆ‘í¥Ğ¹µ½¹Ñ¡Y…±Õ•ô¼‘í¥Ğ¹‘…å=™5½¹Ñ¡ôˆ°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤°Ñ•áÑ±¥¸õQ•áÑ±¥¸¹•¹Ñ•È°½±½Èõ5ÕÑ•¤ôô(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸5…¹Õ…±Ñ¥Ù¥Ñå¥…±½œ¡•á¥ÍÑ¥¹œè…¥±åÑ¥Ù¥Ñå¹Ñ¥Ñäü°½¹¥Íµ¥ÍÌè€ ¤€´øU¹¥Ğ°½¹M…Ù”è€¡…¥±åÑ¥Ù¥Ñå¹Ñ¥Ñä¤€´øU¹¥Ğ¤ì(€€€Ù…ÈÑ½Ñ…°‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡•á¥ÍÑ¥¹œü¹Ñ½Ñ…±…±½É¥•Í-…°ü¹±•Ğ èé¹Õµ‰•È¤¹½ÉµÁÑä ¤¤ô(€€€Ù…È…Ñ¥Ù”‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡•á¥ÍÑ¥¹œü¹…Ñ¥Ù•…±½É¥•Í-…°ü¹±•Ğ èé¹Õµ‰•È¤¹½ÉµÁÑä ¤¤ô(€€€Ù…ÈÍÑ•ÁÌ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡•á¥ÍÑ¥¹œü¹ÍÑ•ÁÌü¹Ñ½MÑÉ¥¹œ ¤¹½ÉµÁÑä ¤¤ô(€€€Ù…È•á•É¥Í”‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡•á¥ÍÑ¥¹œü¹•á•É¥Í•5¥¹ÕÑ•Ìü¹Ñ½MÑÉ¥¹œ ¤¹½ÉµÁÑä ¤¤ô(€€€Ù…ÈÍ±••À‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡•á¥ÍÑ¥¹œü¹Í±••Á5¥¹ÕÑ•Ìü¹Ñ½MÑÉ¥¹œ ¤¹½ÉµÁÑä ¤¤ô(€€€Ù…È¡È‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡•á¥ÍÑ¥¹œü¹É•ÍÑ¥¹!Èü¹Ñ½MÑÉ¥¹œ ¤¹½ÉµÁÑä ¤¤ô(€€€±•ÉÑ¥…±½œ¡½¹¥Íµ¥ÍÍI•ÅÕ•ÍĞõ½¹¥Íµ¥ÍÌ°Ñ¥Ñ±”õíQ•áĞ ‹šÒï–.Wó
-ÿ
-Kš&/–—–*lˆ¥ô°Ñ•áĞõì(€€€€€€€½±Õµ¸¡5½‘¥™¥•È¹Ù•ÉÑ¥…±MÉ½±°¡É•µ•µ‰•ÉMÉ½±±MÑ…Ñ” ¤¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä à¹‘À¤¤ì(€€€€€€€€€€€±¥ÍÑ=˜ ‹šÚ#¢Êí­…°ˆÑ¼Ñ½Ñ…°°€‹šÒï–.U­…°ˆÑ¼…Ñ¥Ù”°€‹š¶§šVÀˆÑ¼ÍÑ•ÁÌ°€‹¦/–.W–"ˆÑ¼•á•É¥Í”°€‹v‡rƒ–"ˆÑ¼Í±••À°€‹–º'¦vgšf–şš.4ˆÑ¼¡È¤¹™½É…¡%¹‘•á•ì¥¹‘•à°Á…¥È€´ø(€€€€€€€€€€€€€€€A…Á•É¥•±¡Á…¥È¹Í•½¹°íØ€´øİ¡•¸¡¥¹‘•à¥ìÀ´ùÑ½Ñ…°õØìÄ´ù…Ñ¥Ù”õØìÈ´ùÍÑ•ÁÌõØìÌ´ù•á•É¥Í”õØìĞ´ùÍ±••ÀõØí•±Í”´ù¡ÈõÙõô°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°±…‰•°õÁ…¥È¹™¥ÉÍĞ¤(€€€€€€€€€€€ô(€€€€€€€ô(€€€ô°½¹™¥Éµ	ÕÑÑ½¸õíQ•áÑ	ÕÑÑ½¹1¥­” ‹’şw–¶`ˆ°½¹±¥¬õì½¹M…Ù”¡…¥±åÑ¥Ù¥Ñå¹Ñ¥Ñä¡1½…±…Ñ”¹¹½Ü ¤¹Ñ½MÑÉ¥¹œ ¤°Ñ½Ñ…°¹Ñ½½Õ‰±•=É9Õ±° ¤°…Ñ¥Ù”¹Ñ½½Õ‰±•=É9Õ±° ¤°ÍÑ•ÁÌ¹Ñ½1½¹=É9Õ±° ¤°•á•É¥Í”¹Ñ½%¹Ñ=É9Õ±° ¤°Í±••À¹Ñ½%¹Ñ=É9Õ±° ¤°¡È¹Ñ½%¹Ñ=É9Õ±° ¤¤¤ô¥ô°‘¥Íµ¥ÍÍ	ÕÑÑ½¸õíQ•áÑ	ÕÑÑ½¹1¥­” ‹
-·Ï
-ï¬ˆ°½¹¥Íµ¥ÍÌ¥ô¤)ô()ÁÉ¥Ù…Ñ”™Õ¸MÑÉ¥¹œ¹™¥±Ñ•É9Õµ‰•È ¤€ô™¥±Ñ•Èì¥Ğ¹¥Í¥¥Ğ ¤ñğ¥Ğôôœ¸œñğ¥Ğôôœ´œô)ÁÉ¥Ù…Ñ”™Õ¸5…ÀñMÑÉ¥¹œ±MÑÉ¥¹œø¹¡­•äèMÑÉ¥¹œ¤€ôÑ¡¥Ím­•åtü¹Ñ½½Õ‰±•=É9Õ±° ¤€üè€À¸À()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸!•…±Ñ¡Õ¥‘•MÉ••¸¡Ù´è5…¥¹Y¥•İ5½‘•°°½¹	…¬è€ ¤€´øU¹¥Ğ°½¹A•Éµ¥ÍÍ¥½¸è€ ¤€´øU¹¥Ğ¤ì(€€€Ù…°½¹Ñ•áĞ€ô1½…±½¹Ñ•áĞ¹ÕÉÉ•¹Ğ(€€€Ù…°…Ù…¥±…‰¥±¥Ñä€ôÉ•µ•µ‰•ÈìÙ´¹¡•…±Ñ ¹…Ù…¥±…‰¥±¥Ñä ¤ô(€€€½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…áM¥é” ¤¹Ù•ÉÑ¥…±MÉ½±°¡É•µ•µ‰•ÉMÉ½±±MÑ…Ñ” ¤¤¹Á…‘‘¥¹œ ÈÀ¹‘À¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä Äà¹‘À¤¤ì(€€€€€€€A…•!•…‘•È ‰…Éµ¥¸ƒ¦šBë¢¢·–ºhˆ°€‹–º3’êˆ°½¹	…¬¤(€€€€€€€Q•áĞ ‹ó
-ÿ»šÖ
-0ˆ°½±½Èõ5ÕÑ•¤(€€€€€€€Q•áĞ ‰Y•¹Ô€ÈA±ÕÌƒŠH…Éµ¥¸½¹¹•ĞƒŠHƒc¯
-ç
-Ï7
-¿ ƒŠHƒ»š‚¦’+¢¢c¦2Èˆ¤(€€€€€€€Q•áĞ ‹šr³
-‹_«½…Éµ¥»ãnÓš:—š:—Úkok®¿šr¯–»c¯
-ç
-Ï7
-¿#
-K¢ª·ÿ–>[
-+ûgšnã7¢úóÿš¢§¦fC
-–’[¦£¦k’ş‡¿’öÿR£_ûo
-Oˆ¤(€€€€€€€!½É¥é½¹Ñ…±¥Ù¥‘•È¡½±½ÈõIÕ±”¤(€€€€€€€Õ¥‘•MÑ•À ˆÄˆ°€‰¹‘É½¥“»¢¢·–ºkŸc¯
-ç
-Ï7
-¿#
-K¦Z/<ˆ°€‹¢¢·–ºhƒŠHƒ
-ï
-·—«
-£_§
-“C
-ßğƒŠHƒ_§
-“C
-ßğƒŠHƒc¯
-ç
-Ï7
-¿ ˆ¤(€€€€€€€Õ¥‘•MÑ•À ˆÈˆ°€‰…Éµ¥¸½¹¹•Ó/
-'–Çšr'g
-,ˆ°€‰…Éµ¥¸½¹¹•ĞƒŠHƒ¢¢·–ºhƒŠHƒš:—Úkšâ#ÿ
-‹_¨ƒŠH!•…±Ñ ½¹¹•Óš¶§šVÃï
-¯·«óï–şš.7ïv‡rƒ
-K¢¢Ç–>¿_ûgˆ¤(€€€€€€€Õ¥‘•MÑ•À ˆÌˆ°€‹šr³
-‹_«ã¢ª·ÿ–>[
-+
-K¢¢Ç–>¿g
-,ˆ°€‹’â/»s
-ÿÏ/
-'¢†£’ëW
-3|ß¢»¦†{»¢ª·ÿ–>[
-+š¢§¦fC
-K¢¢Ç–>¿_ûgˆ¤(€€€€€€€Q•áĞ ‹*Ûš,è€‘íİ¡•¸¡…Ù…¥±…‰¥±¥Ñä¥í!•…±Ñ¡Ù…¥±…‰¥±¥Ñä¹Y%1	1´ø‹–"§R£–>¿¢ôˆí!•…±Ñ¡Ù…¥±…‰¥±¥Ñä¹9M}%9MQ10´ø‹šnÓšZÃ3–ş¢šˆí!•…±Ñ¡Ù…¥±…‰¥±¥Ñä¹9=Q}MUAA=IQ´ø‹O»®¿šr¯Ÿ¿–"§R£’â7–>¼‰õôˆ°½±½Èõ¥˜¡…Ù…¥±…‰¥±¥Ñäôõ!•…±Ñ¡Ù…¥±…‰¥±¥Ñä¹Y%1	1¤•¹Ğ•±Í”5ÕÑ•¤(€€€€€€€1¥¹•	ÕÑÑ½¸ ‹¢ª·ÿ–>[
-+š¢§¦fC
-K¢¢·–ºhˆ°½¹A•Éµ¥ÍÍ¥½¸°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°…Ù…¥±…‰¥±¥Ñäôõ!•…±Ñ¡Ù…¥±…‰¥±¥Ñä¹Y%1	1¤(€€€€€€€1¥¹•	ÕÑÑ½¸ ‹c¯
-ç
-Ï7
-¿#¢¢·–ºk
-K¦Z/<ˆ°ì(€€€€€€€€€€€ÉÕ¹…Ñ¡¥¹œì½¹Ñ•áĞ¹ÍÑ…ÉÑÑ¥Ù¥Ñä¡%¹Ñ•¹Ğ ‰…¹‘É½¥¹¡•…±Ñ ¹½¹¹•Ğ¹…Ñ¥½¸¹!1Q!}!=5}MQQ%9Lˆ¤¤ô(€€€€€€€ô°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤(€€€€€€€!½É¥é½¹Ñ…±¥Ù¥‘•È¡½±½ÈõIÕ±”¤(€€€€€€€Q•áĞ ‹–B3šrŸ7«–‚Ó–B ˆ°ÍÑå±”õ…¹‘É½¥‘à¹½µÁ½Í”¹µ…Ñ•É¥…°Ì¹5…Ñ•É¥…±Q¡•µ”¹ÑåÁ½É…Á¡ä¹Ñ¥Ñ±•1…É”¤(€€€€€€€Q•áĞ ‰…Éµ¥¸½¹¹•Ó–Ó»–B3šr¢¢·–ºk£šrÖ–B3šršf–"ï
-KŠë¢ª7_›?ƒWc¯
-ç
-Ï7
-¿#
-K–"§R£Ÿ7«–‚Ó–B#¿oóƒ»3š&/–—–*o7û¿–ë–*oRï¦v‹¹…Éµ¥¸M[–>[¢úó
-K’öÿ#ûgˆ°½±½Èõ5ÕÑ•¤(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸Õ¥‘•MÑ•À¡¹Õµ‰•ÈèMÑÉ¥¹œ°Ñ¥Ñ±”èMÑÉ¥¹œ°‰½‘äèMÑÉ¥¹œ¤ì(€€€I½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄÈ¹‘À¤¤ì(€€€€€€€Q•áĞ¡¹Õµ‰•È°½±½Èõ•¹Ğ°ÍÑå±”õ…¹‘É½¥‘à¹½µÁ½Í”¹µ…Ñ•É¥…°Ì¹5…Ñ•É¥…±Q¡•µ”¹ÑåÁ½É…Á¡ä¹Ñ¥Ñ±•1…É”¤(€€€€€€€½±Õµ¸ìQ•áĞ¡Ñ¥Ñ±”°™½¹Ñ]•¥¡Ğõ½¹Ñ]•¥¡Ğ¹M•µ¥	½±¤ìQ•áĞ¡‰½‘ä°½±½Èõ5ÕÑ•¤ô(€€€ô)ô()½µÁ½Í…‰±”)ÁÉ¥Ù…Ñ”™Õ¸áÁ½ÉÑMÉ••¸¡Ù´è5…¥¹Y¥•İ5½‘•°¤ì(€€€Ù…°½¹Ñ•áĞ€ô1½…±½¹Ñ•áĞ¹ÕÉÉ•¹Ğ(€€€Ù…°Í½Á”€ôÉ•µ•µ‰•É½É½ÕÑ¥¹•M½Á” ¤(€€€Ù…È™É½´‰äÉ•µ•µ‰•ÉM…Ù•…‰±”ìµÕÑ…‰±•MÑ…Ñ•=˜¡1½…±…Ñ”¹¹½Ü ¤¹µ¥¹ÕÍ…åÌ Ø¤¤ô(€€€Ù…ÈÑ¼‰äÉ•µ•µ‰•ÉM…Ù•…‰±”ìµÕÑ…‰±•MÑ…Ñ•=˜¡1½…±…Ñ”¹¹½Ü ¤¤ô(€€€Ù…Èµ…É­‘½İ¸‰äÉ•µ•µ‰•ÉM…Ù•…‰±”ìµÕÑ…‰±•MÑ…Ñ•=˜¡ÑÉÕ”¤ô(€€€Ù…ÈÑ…É•Ğ‰äÉ•µ•µ‰•ÉM…Ù•…‰±”ìµÕÑ…‰±•MÑ…Ñ•=˜ ‹gç˜ˆ¤ô(€€€Ù…ÈÁÉ•Ù¥•Ü‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ ˆˆ¤ô(€€€Ù…È‰åÑ•Ì‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜¡	åÑ•ÉÉ…ä À¤¤ô(€€€Ù…ÈÁ•¹‘¥¹œ‰äÉ•µ•µ‰•ÈìµÕÑ…‰±•MÑ…Ñ•=˜ñA…¥ÈñMÑÉ¥¹œ±	åÑ•ÉÉ…äøüø¡¹Õ±°¤ô(€€€Ù…°Í…Ù•1…Õ¹¡•È€ôÉ•µ•µ‰•É1…Õ¹¡•É½ÉÑ¥Ù¥ÑåI•ÍÕ±Ğ¡Ñ¥Ù¥ÑåI•ÍÕ±Ñ½¹ÑÉ…ÑÌ¹É•…Ñ•½Õµ•¹Ğ ˆ¨¼¨ˆ¤¤ìÕÉ¤€´ø(€€€€€€€ÕÉ¤ü¹±•Ğì½¹Ñ•áĞ¹½¹Ñ•¹ÑI•Í½±Ù•È¹½Á•¹=ÕÑÁÕÑMÑÉ•…´¡¥Ğ¤ü¹ÕÍ”ì½ÕĞ€´ø½ÕĞ¹İÉ¥Ñ”¡Á•¹‘¥¹œü¹Í•½¹€üè‰åÑ•Ì¤ôô(€€€ô(€€€Ù…°‰…­ÕÁ%µÁ½ÉĞ€ôÉ•µ•µ‰•É1…Õ¹¡•É½ÉÑ¥Ù¥ÑåI•ÍÕ±Ğ¡Ñ¥Ù¥ÑåI•ÍÕ±Ñ½¹ÑÉ…ÑÌ¹=Á•¹½Õµ•¹Ğ ¤¤ìÕÉ¤€´ø(€€€€€€€ÕÉ¤ü¹±•ĞìÍ½Á”¹±…Õ¹ ìÉÕ¹…Ñ¡¥¹œì½¹Ñ•áĞ¹½¹Ñ•¹ÑI•Í½±Ù•È¹½Á•¹%¹ÁÕÑMÑÉ•…´¡¥Ğ¤„„¹‰Õ™™•É•‘I•…‘•È ¤¹ÕÍ”ìÈ€´øÙ´¹É•ÍÑ½É”¡È¹É•…‘Q•áĞ ¤¤ôôôô(€€€ô(€€€Ù…°…Éµ¥¹%µÁ½ÉĞ€ôÉ•µ•µ‰•É1…Õ¹¡•É½ÉÑ¥Ù¥ÑåI•ÍÕ±Ğ¡Ñ¥Ù¥ÑåI•ÍÕ±Ñ½¹ÑÉ…ÑÌ¹=Á•¹½Õµ•¹Ğ ¤¤ìÕÉ¤€´ø(€€€€€€€ÕÉ¤ü¹±•Ğì½¹Ñ•áĞ¹½¹Ñ•¹ÑI•Í½±Ù•È¹½Á•¹%¹ÁÕÑMÑÉ•…´¡¥Ğ¤ü¹‰Õ™™•É•‘I•…‘•È ¤ü¹ÕÍ”ìÈ€´øÙ´¹¥µÁ½ÉÑ…Éµ¥¹ÍØ¡È¹É•…‘Q•áĞ ¤¤ôô(€€€ô(€€€1…Õ¹¡•‘™™•Ğ¡™É½´°Ñ¼°µ…É­‘½İ¸°Ñ…É•Ğ¤ì(€€€€€€€¥˜€ …™É½´¹¥Í™Ñ•È¡Ñ¼¤¤ì(€€€€€€€€€€€Ù…°¹ÕÑÉ¥Ñ¥½¸€ôÙ´¹•áÁ½ÉĞ¡™É½´±Ñ¼±µ…É­‘½İ¸¤(€€€€€€€€€€€Ù…°İ½É­½ÕĞ€ôÙ´¹•áÁ½ÉÑ]½É­½ÕĞ¡™É½´±Ñ¼±µ…É­‘½İ¸¤(€€€€€€€€€€€Ù…°É•ÍÕ±Ğ€ôİ¡•¸¡Ñ…É•Ğ¤ì(€€€€€€€€€€€€€€€€‹š‚¦’(ˆ€´ø¹ÕÑÉ¥Ñ¥½¸(€€€€€€€€€€€€€€€€‹¶/#°ˆ€´øİ½É­½ÕĞ(€€€€€€€€€€€€€€€•±Í”€´øì(€€€€€€€€€€€€€€€€€€€¥˜¡µ…É­‘½İ¸¤ì(€€€€€€€€€€€€€€€€€€€€€€€Ù…°Ñ•áĞ€ô¹ÕÑÉ¥Ñ¥½¸¹™¥ÉÍĞ€¬€‰q¹q¸´´µq¹q¸ˆ€¬İ½É­½ÕĞ¹™¥ÉÍĞ(€€€€€€€€€€€€€€€€€€€€€€€Ñ•áĞÑ¼Ñ•áĞ¹Ñ½	åÑ•ÉÉ…ä ¤(€€€€€€€€€€€€€€€€€€€ô•±Í”İ½É­½ÕĞ(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô(€€€€€€€€€€€ÁÉ•Ù¥•ÜõÉ•ÍÕ±Ğ¹™¥ÉÍĞì‰åÑ•ÌõÉ•ÍÕ±Ğ¹Í•½¹(€€€€€€€ô(€€€ô(€€€1…éå½±Õµ¸¡5½‘¥™¥•È¹™¥±±5…áM¥é” ¤°½¹Ñ•¹ÑA…‘‘¥¹œõA…‘‘¥¹Y…±Õ•Ì ÈÀ¹‘À¤°Ù•ÉÑ¥…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄĞ¹‘À¤¤ì(€€€€€€€¥Ñ•´ìA…•!•…‘•È ‹
-£
-¿
-çwó ˆ¤ìQ•áĞ ‹¢¢c¦2Ë
-KW
-‡
-“¯¯–ë–*o_!'ãšâ‡_›W
-ó'C
-¿
-K–ú_
-'
-3ûgˆ°½±½Èõ5ÕÑ•°µ½‘¥™¥•Èõ5½‘¥™¥•È¹Á…‘‘¥¹œ¡Ñ½ÀôÄÀ¹‘À¤¤ô(€€€€€€€¥Ñ•´ìM•Ñ¥½¹Q¥Ñ±” ‹–ë–*o–¾û¢Æ„ˆ¤ìI½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä à¹‘À¤¤ì(€€€€€€€€€€€±¥ÍÑ=˜ ‹š‚¦’(ˆ°‹¶/#°ˆ°‹gç˜ˆ¤¹™½É… ì¥Ñ•´€´ø1¥¹•	ÕÑÑ½¸¡¥Ñ•´°íÑ…É•Ğõ¥Ñ•´ì¥˜¡¥Ñ•´ôô‹gç˜ˆ¤µ…É­‘½İ¸õÑÉÕ•ô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¹¡•¥¡Ğ ĞĞ¹‘À¤¤ô(€€€€€€€ôì¥˜¡Ñ…É•Ğôô‹gç˜ˆ¤Q•áĞ ‹ÖÇ–B#–ë–*o½5…É­‘½İ»–ö‹–ò?Ÿgˆ°½±½È€ô5ÕÑ•¤ô(€€€€€€€¥Ñ•´ìI½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄÀ¹‘À¤¤ì(€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‹¦Z/–/š^•q¸‘™É½´ˆ°ìÍ¡½İ…Ñ•A¥­•È¡½¹Ñ•áĞ±™É½´¥í™É½´õ¥Ñôô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¤(€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‹Ö’êš^•q¸‘Ñ¼ˆ°ìÍ¡½İ…Ñ•A¥­•È¡½¹Ñ•áĞ±Ñ¼¥íÑ¼õ¥Ñôô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¤(€€€€€€€ôô(€€€€€€€¥Ñ•´ìI½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä ÄÀ¹‘À¤¤ì(€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‰5…É­‘½İ¸€ ¹µ¤ˆ°íµ…É­‘½İ¸õÑÉÕ•ô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¤(€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‰MX€¡á•³R ¤ˆ°í¥˜¡Ñ…É•Ğ„ô‹gç˜ˆ¤µ…É­‘½İ¸õ™…±Í•ô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤°Ñ…É•Ğ„ô‹gç˜ˆ¤(€€€€€€€ôô(€€€€€€€¥Ñ•´ìI½Ü¡5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤°¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹MÁ…•	•Ñİ••¸¤ìQ•áĞ ‹_³O—ğˆ°½±½Èõ5ÕÑ•¤ìQ•áĞ ˆ‘íÁÉ•Ù¥•Ü¹±¥¹•M•ÅÕ•¹” ¤¹½Õ¹Ğ ¥÷¢†0ˆ°½±½Èõ5ÕÑ•¤ôô(€€€€€€€¥Ñ•´ì=ÕÑ±¥¹•‘…É¡Í¡…Á”õI•Ñ…¹±•M¡…Á”°‰½É‘•Èõ	½É‘•ÉMÑÉ½­” Ä¹‘À±IÕ±”¤°µ½‘¥™¥•Èõ5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¹¡•¥¡Ğ ÌÀÀ¹‘À¤¤ìQ•áĞ¡ÁÉ•Ù¥•Ü°5½‘¥™¥•È¹Á…‘‘¥¹œ ÄÈ¹‘À¤¹Ù•ÉÑ¥…±MÉ½±°¡É•µ•µ‰•ÉMÉ½±±MÑ…Ñ” ¤¤¤ôô(€€€€€€€¥Ñ•´ìI½Ü¡¡½É¥é½¹Ñ…±ÉÉ…¹•µ•¹ĞõÉÉ…¹•µ•¹Ğ¹ÍÁ…•‘	ä à¹‘À¤¤ì(€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‹W
-‡
-“¯’şw–¶`ˆ°ìÙ…°¹…µ”ô‹–—–êß¢¢c¦2É|‘íÑ…É•Ñõ|‘í™É½µõ|‘íÑ½ô¸‘í¥˜¡µ…É­‘½İ¸¤‰µˆ•±Í”€‰ÍØ‰ôˆìÁ•¹‘¥¹œõ¹…µ”Ñ¼‰åÑ•ÌìÍ…Ù•1…Õ¹¡•È¹±…Õ¹ ¡¹…µ”¤ô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¤(€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‹–Çšr$ˆ°ìÍ¡…É•	åÑ•Ì¡½¹Ñ•áĞ°€‹–—–êß¢¢c¦2É|‘íÑ…É•Ñô¸‘í¥˜¡µ…É­‘½İ¸¤‰µˆ•±Í”€‰ÍØ‰ôˆ°‰åÑ•Ì°¥˜¡µ…É­‘½İ¸¤‰Ñ•áĞ½µ…É­‘½İ¸ˆ•±Í”€‰Ñ•áĞ½ÍØˆ¤ô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¤(€€€€€€€€€€€1¥¹•	ÕÑÑ½¸ ‹–£šZ
-ÏSğˆ°ì€¡½¹Ñ•áĞ¹•ÑMåÍÑ•µM•ÉÙ¥”¡½¹Ñ•áĞ¹1%A	=I}MIY%¤…Ì±¥Á‰½…É‘5…¹…•È¤¹Í•ÑAÉ¥µ…Éå±¥À¡±¥Á…Ñ„¹¹•İA±…¥¹Q•áĞ ‹š‚¦’+¢¢c¦2Èˆ±ÁÉ•Ù¥•Ü¤¤ô°5½‘¥™¥•È¹İ•¥¡Ğ Å˜¤¤(€€€€€€€ôô(€€€€€€€¥Ñ•´ìM•Ñ¥½¹Q¥Ñ±” ‹C
-¿
-‹_£’îšnÿ–>[¢úğˆ¤ô(€€€€€€€¥Ñ•´ì1¥¹•	ÕÑÑ½¸ ‹–£ó
-ÿ
-I)M=;Ÿ’şw–¶`ˆ°ì(€€€€€€€€€€€Í½Á”¹±…Õ¹ ìÙ…°‘…Ñ„õÙ´¹‰…­ÕÀ ¤¹Ñ½	åÑ•ÉÉ…ä ¤ìÙ…°¹…µ”ô‰•¥å½…ÁÀµ‰…­ÕÀ´‘í1½…±…Ñ”¹¹½Ü ¥ô¹©Í½¸ˆìÁ•¹‘¥¹œõ¹…µ”Ñ¼‘…Ñ„ìÍ…Ù•1…Õ¹¡•È¹±…Õ¹ ¡¹…µ”¤ô(€€€€€€€ô°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ô(€€€€€€€¥Ñ•´ì1¥¹•	ÕÑÑ½¸ ‰)M=;C
-¿
-‹_
-K–ú§–ˆ°í‰…­ÕÁ%µÁ½ÉĞ¹±…Õ¹ ¡…ÉÉ…å=˜ ‰…ÁÁ±¥…Ñ¥½¸½©Í½¸ˆ°‰Ñ•áĞ½Á±…¥¸ˆ¤¥ô°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ô(€€€€€€€¥Ñ•´ì1¥¹•	ÕÑÑ½¸ ‰…Éµ¥¸M[
-K–>[
-+¢úó
- ˆ°í…Éµ¥¹%µÁ½ÉĞ¹±…Õ¹ ¡…ÉÉ…å=˜ ‰Ñ•áĞ½ÍØˆ°‰Ñ•áĞ½½µµ„µÍ•Á…É…Ñ•µÙ…±Õ•Ìˆ°‰Ñ•áĞ½Á±…¥¸ˆ¤¥ô°5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ô(€€€€€€€¥Ñ•´ìQ•áĞ ‹–¾û–şs–"_–B4è…Ñ”¿š^—’îcQ½Ñ…°…±½É¥•Ì¿šÚ#¢Êï
-¯·«óMÑ•ÁÌ¿š¶§šVÃá•É¥Í”5¥¹ÕÑ•Ì¿¦/–.W–"M±••ÀÕÉ…Ñ¥½¸¿v‡rƒšf¦ZOI•ÍÑ¥¹œ!•…ÉĞI…Ñ”¿–º'¦vgšf–şš.7–>[¢úó–&7­)M=;C
-¿
-‹_
-Kš:£––£_ûgˆ°½±½Èõ5ÕÑ•¤ô(€€€ô)ô()ÁÉ¥Ù…Ñ”™Õ¸Í¡½İ…Ñ•A¥­•È¡½¹Ñ•áĞè½¹Ñ•áĞ°ÕÉÉ•¹Ğè1½…±…Ñ”°½¹A¥­•è€¡1½…±…Ñ”¤€´øU¹¥Ğ¤ì(€€€…Ñ•A¥­•É¥…±½œ¡½¹Ñ•áĞ°í|±ä±´±€´ø½¹A¥­•¡1½…±…Ñ”¹½˜¡ä±´¬Ä±¤¥ô°ÕÉÉ•¹Ğ¹å•…È±ÕÉÉ•¹Ğ¹µ½¹Ñ¡Y…±Õ”´Ä±ÕÉÉ•¹Ğ¹‘…å=™5½¹Ñ ¤¹Í¡½Ü ¤)ô()ÁÉ¥Ù…Ñ”™Õ¸Í¡…É•	åÑ•Ì¡½¹Ñ•áĞè½¹Ñ•áĞ°¹…µ”èMÑÉ¥¹œ°‰åÑ•Ìè	åÑ•ÉÉ…ä°µ¥µ”èMÑÉ¥¹œ¤ì(€€€Ù…°‘¥Èõ¥±”¡½¹Ñ•áĞ¹…¡•¥È°‰•áÁ½ÉÑÌˆ¤¹…ÁÁ±äíµ­‘¥ÉÌ ¥ôìÙ…°™¥±”õ¥±”¡‘¥È±¹…µ”¤ì™¥±”¹İÉ¥Ñ•	åÑ•Ì¡‰åÑ•Ì¤(€€€Ù…°ÕÉ¤õ¥±•AÉ½Ù¥‘•È¹•ÑUÉ¥½É¥±”¡½¹Ñ•áĞ°ˆ‘í½¹Ñ•áĞ¹Á…­…•9…µ•ô¹™¥±•Ìˆ±™¥±”¤(€€€½¹Ñ•áĞ¹ÍÑ…ÉÑÑ¥Ù¥Ñä¡%¹Ñ•¹Ğ¹É•…Ñ•¡½½Í•È¡%¹Ñ•¹Ğ¡%¹Ñ•¹Ğ¹Q%=9}M9¤¹…ÁÁ±äì(€€€€€€€ÑåÁ”õµ¥µ”ìÁÕÑáÑÉ„¡%¹Ñ•¹Ğ¹aQI}MQI4±ÕÉ¤¤ì…‘‘±…Ì¡%¹Ñ•¹Ğ¹1}I9Q}I}UI%}AI5%MM%=8¤(€€€ô°‹š‚¦’+¢¢c¦2Ë
-K–Çšr$ˆ¤¤)ô(
+        IconButton(onClick=onDelete) { Icon(Icons.Outlined.Close, "å‰Šé™¤") }
+    }
+    HorizontalDivider(color=Rule)
+}
+
+@Composable
+private fun FoodAreaScreen(vm: MainViewModel, onNewFood: (String) -> Unit, onEdit: (FoodEntity) -> Unit) {
+    var section by rememberSaveable { mutableStateOf("è¨˜éŒ²") }
+    Column(Modifier.fillMaxSize()) {
+        Row(Modifier.fillMaxWidth().padding(horizontal=18.dp, vertical=8.dp), horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            LineButton("è¨˜éŒ²", {section="è¨˜éŒ²"}, Modifier.weight(1f).height(44.dp))
+            LineButton("é£Ÿå“", {section="é£Ÿå“"}, Modifier.weight(1f).height(44.dp))
+        }
+        if(section=="è¨˜éŒ²") LogScreen(vm,onNewFood) else FoodsScreen(vm,onEdit,{onNewFood("")})
+    }
+}
+
+@Composable
+private fun AnalysisAreaScreen(vm: MainViewModel) {
+    var section by rememberSaveable { mutableStateOf("ç­‹ãƒˆãƒ¬") }
+    Column(Modifier.fillMaxSize()) {
+        Row(Modifier.fillMaxWidth().padding(horizontal=18.dp, vertical=8.dp), horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            LineButton("ç­‹ãƒˆãƒ¬", {section="ç­‹ãƒˆãƒ¬"}, Modifier.weight(1f).height(44.dp))
+            LineButton("æ „é¤Š", {section="æ „é¤Š"}, Modifier.weight(1f).height(44.dp))
+        }
+        if(section=="ç­‹ãƒˆãƒ¬") WorkoutProgressScreen(vm) else HistoryScreen(vm)
+    }
+}
+
+@Composable
+private fun MoreAreaScreen(vm: MainViewModel, onGoals: () -> Unit, onHealthGuide: () -> Unit) {
+    var section by rememberSaveable { mutableStateOf("è¨­å®š") }
+    Column(Modifier.fillMaxSize()) {
+        Row(Modifier.fillMaxWidth().padding(horizontal=18.dp, vertical=8.dp), horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            LineButton("è¨­å®š", {section="è¨­å®š"}, Modifier.weight(1f).height(44.dp))
+            LineButton("æ›¸ãå‡ºã—", {section="æ›¸ãå‡ºã—"}, Modifier.weight(1f).height(44.dp))
+        }
+        if(section=="æ›¸ãå‡ºã—") ExportScreen(vm) else WorkoutSettingsScreen(vm,onHealthGuide,onGoals)
+    }
+}
+
+@Composable
+private fun LogScreen(vm: MainViewModel, onNewFood: (String) -> Unit) {
+    val query by vm.searchQuery.collectAsStateWithLifecycle()
+    val candidates by vm.candidates.collectAsStateWithLifecycle()
+    var selected by remember { mutableStateOf<FoodEntity?>(null) }
+    var amount by remember { mutableStateOf("1") }
+    var timestamp by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    val context = LocalContext.current
+    LazyColumn(Modifier.fillMaxSize(), contentPadding=PaddingValues(20.dp), verticalArrangement=Arrangement.spacedBy(14.dp)) {
+        item {
+            PageHeader("é£Ÿäº‹ã‚’è¨˜éŒ²")
+            Text("ç¾åœ¨ ${timestamp.localTime().format(DateTimeFormatter.ofPattern("HH:mm"))}", color=Muted)
+        }
+        item { PaperField(query, { vm.setQuery(it); selected=null }, Modifier.fillMaxWidth(), placeholder="é£Ÿå“åã‚’å…¥åŠ›ï¼ˆä¾‹ï¼šãƒŠï¼‰") }
+        if (selected == null) {
+            item { Text(if(query.isBlank()) "ã‚ˆãä½¿ã†é£Ÿå“" else "æ¤œç´¢çµæœ", color=Muted) }
+            items(candidates, key={ it.id }) { candidate -> FoodCandidate(candidate) {
+                selected=candidate.food(); amount=number(candidate.lastAmount); timestamp=System.currentTimeMillis()
+            } }
+            if (query.isNotBlank() && candidates.none { it.name == query.trim() }) item {
+                LineButton("ã€Œ${query.trim()}ã€ã‚’æ–°ã—ã„é£Ÿå“ã¨ã—ã¦ç™»éŒ²", { onNewFood(query.trim()) }, Modifier.fillMaxWidth())
+            }
+        } else item {
+            val food = selected!!; val numericAmount = amount.toDoubleOrNull() ?: 0.0; val preview = food.nutrients() * numericAmount
+            Column(verticalArrangement=Arrangement.spacedBy(14.dp)) {
+                OutlinedCard(shape=RectangleShape, border=BorderStroke(1.dp, Rule), modifier=Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(14.dp), verticalArrangement=Arrangement.spacedBy(10.dp)) {
+                        Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween) { Text(food.name, style=androidx.compose.material3.MaterialTheme.typography.titleLarge); Text("1${food.unit} ${food.unitNote.orEmpty()}", color=Muted) }
+                        Text("${number(food.perKcal)} kcalã€€P ${number(food.perProtein)} gã€€ç³–è³ª ${number(food.perSugar)} gã€€è„‚è³ª ${number(food.perFat)} g")
+                        val additives = additivesFromJson(food.additivesJson)
+                        if (additives.isNotEmpty()) Text(additives.joinToString("ãƒ»"), color=Muted)
+                    }
+                }
+                Text("é‡ï¼ˆ${food.unit}ï¼‰", color=Muted)
+                Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                    LineButton("âˆ’", { amount=number((numericAmount-.5).coerceAtLeast(.5)) })
+                    PaperField(amount, { amount=it }, Modifier.weight(1f))
+                    LineButton("ï¼‹", { amount=number(numericAmount+.5) })
+                }
+                LineButton("æ™‚åˆ» ${timestamp.localTime().format(DateTimeFormatter.ofPattern("HH:mm"))}", { showTimePicker(context, timestamp) { timestamp=it } }, Modifier.fillMaxWidth())
+                Text("ã“ã®é‡ã§ï¼š${number(preview.kcal)} kcalãƒ»ãŸã‚“ã±ãè³ª ${number(preview.protein)} gãƒ»ç³–è³ª ${number(preview.sugar)} gãƒ»æ°´åˆ† ${number(preview.water)} ml")
+                LineButton("ä¿å­˜", { vm.addEntry(food, numericAmount, timestamp); selected=null; amount="1" }, Modifier.fillMaxWidth(), numericAmount>0)
+                TextButtonLike("é¸ã³ç›´ã™", { selected=null })
+            }
+        }
+    }
+}
+
+@Composable
+private fun FoodCandidate(candidate: FoodWithCount, onClick: () -> Unit) {
+    Row(Modifier.fillMaxWidth().clickable(onClick=onClick).padding(vertical=11.dp), horizontalArrangement=Arrangement.SpaceBetween) {
+        Text(candidate.name)
+        Text("1${candidate.unit} ${candidate.unitNote.orEmpty()}ãƒ»${number(candidate.perKcal)} kcal", color=Muted)
+    }
+    HorizontalDivider(color=Rule)
+}
+
+@Composable private fun SectionTitle(text: String) { Text(text, color=Muted); Spacer(Modifier.height(6.dp)); HorizontalDivider(color=Rule) }
+
+private fun showTimePicker(context: Context, current: Long, onPicked: (Long) -> Unit) {
+    val local = Instant.ofEpochMilli(current).atZone(ZoneId.systemDefault()).toLocalDateTime()
+    TimePickerDialog(context, { _, hour, minute ->
+        onPicked(LocalDateTime.of(local.toLocalDate(), LocalTime.of(hour, minute)).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+    }, local.hour, local.minute, true).show()
+}
+
+@Composable
+private fun FoodsScreen(vm: MainViewModel, onEdit: (FoodEntity) -> Unit, onNew: () -> Unit) {
+    val foods by vm.foods.collectAsStateWithLifecycle()
+    LazyColumn(Modifier.fillMaxSize(), contentPadding=PaddingValues(20.dp)) {
+        item { PageHeader("é£Ÿå“ãƒ©ã‚¤ãƒ–ãƒ©ãƒª", "ï¼‹è¿½åŠ ", onNew); Text("ä¸€åº¦ç™»éŒ²ã™ã‚Œã°ã€æ¬¡å›ã‹ã‚‰ã¯åå‰ã‚’1æ–‡å­—ã ã‘ã§æ „é¤Šæƒ…å ±ãŒã™ã¹ã¦å…¥ã‚Šã¾ã™ã€‚", color=Muted, modifier=Modifier.padding(vertical=12.dp)) }
+        items(foods, key={it.id}) { item ->
+            Row(Modifier.fillMaxWidth().clickable { onEdit(item.food()) }.padding(vertical=11.dp), horizontalArrangement=Arrangement.SpaceBetween) {
+                Text(item.name)
+                Text("1${item.unit}ãƒ»${number(item.perKcal)} kcalãƒ»P ${number(item.perProtein)}gã€€${item.usageCount}å›è¨˜éŒ²", color=if(item.usageCount>0) Accent else Muted)
+            }
+            HorizontalDivider(color=Rule)
+        }
+    }
+}
+
+@Composable
+private fun FoodEditScreen(vm: MainViewModel, original: FoodEntity?, preset: String, onBack: () -> Unit) {
+    var name by remember(original, preset) { mutableStateOf(original?.name ?: preset) }
+    var unit by remember(original) { mutableStateOf(original?.unit ?: "å€‹") }
+    var note by remember(original) { mutableStateOf(original?.unitNote.orEmpty()) }
+    var additives by remember(original) { mutableStateOf(original?.additivesJson?.let { additivesFromJson(it).joinToString("ã€") }.orEmpty()) }
+    var confirmDelete by remember { mutableStateOf(false) }
+    val values = remember(original) { mutableStateMapOf<String,String>().apply {
+        nutrientSpecs.forEach { spec -> put(spec.key, original?.nutrients()?.value(spec.key)?.let(::number)?.takeUnless { it == "0" }.orEmpty()) }
+    } }
+    LazyColumn(Modifier.fillMaxSize(), contentPadding=PaddingValues(20.dp), verticalArrangement=Arrangement.spacedBy(12.dp)) {
+        item { PageHeader(if(original == null) "é£Ÿå“ã‚’ç™»éŒ²" else "é£Ÿå“ã‚’ç·¨é›†", "ã‚­ãƒ£ãƒ³ã‚»ãƒ«", onBack) }
+        item { PaperField(name, {name=it}, Modifier.fillMaxWidth(), label="åç§°") }
+        item { Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+            PaperField(unit, {unit=it}, Modifier.weight(1f), label="é‡ã®å˜ä½")
+            PaperField(note, {note=it}, Modifier.weight(1f), label="è£œè¶³ï¼ˆç›®å®‰é‡ï¼‰")
+        } }
+        item { Text("æ „é¤Šæˆåˆ†è¡¨ç¤ºï¼ˆ1${unit.ifBlank { "å˜ä½" }}ã‚ãŸã‚Šï¼‰", color=Muted); HorizontalDivider(color=Rule) }
+        items(nutrientSpecs.chunked(2)) { row -> Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+            row.forEach { spec -> PaperField(values[spec.key].orEmpty(), { values[spec.key]=it.filterNumber() }, Modifier.weight(1f), label="${spec.label} (${spec.unit})") }
+            if(row.size==1) Spacer(Modifier.weight(1f))
+        } }
+        item { PaperField(additives, {additives=it}, Modifier.fillMaxWidth(), label="æ·»åŠ ç‰©ï¼ˆã€Œã€ã€åŒºåˆ‡ã‚Šï¼‰") }
+        item { LineButton("ä¿å­˜", {
+            val n = Nutrients(
+                kcal=values.d("kcal"), protein=values.d("protein"), sugar=values.d("sugar"), fat=values.d("fat"),
+                fiber=values.d("fiber"), salt=values.d("salt"), water=values.d("water"), vitC=values.d("vitC"),
+                vitD=values.d("vitD"), vitB=values.d("vitB"), ca=values.d("ca"), fe=values.d("fe"), mg=values.d("mg"),
+            )
+            vm.saveFood(FoodEntity(
+                id=original?.id ?: 0, name=name.trim(), unit=unit.trim(), unitNote=note.trim().ifBlank { null },
+                lastAmount=original?.lastAmount ?: 1.0, additivesJson=additivesToJson(additives),
+                perKcal=n.kcal, perProtein=n.protein, perSugar=n.sugar, perFat=n.fat, perFiber=n.fiber,
+                perSalt=n.salt, perWater=n.water, perVitC=n.vitC, perVitD=n.vitD, perVitB=n.vitB,
+                perCa=n.ca, perFe=n.fe, perMg=n.mg,
+            )) { onBack() }
+        }, Modifier.fillMaxWidth()) }
+        if (original != null) item { LineButton("ã“ã®é£Ÿå“ã¨é–¢é€£ã™ã‚‹è¨˜éŒ²ã‚’å‰Šé™¤", {confirmDelete=true}, Modifier.fillMaxWidth()) }
+    }
+    if(confirmDelete && original != null) AlertDialog(
+        onDismissRequest={confirmDelete=false}, title={Text("é£Ÿå“ã‚’å‰Šé™¤ã—ã¾ã™ã‹")},
+        text={Text("ã€Œ${original.name}ã€ã¨ã€ã“ã®é£Ÿå“ã«ç´ã¥ãã™ã¹ã¦ã®é£Ÿäº‹è¨˜éŒ²ãŒå‰Šé™¤ã•ã‚Œã¾ã™ã€‚")},
+        confirmButton={TextButtonLike("å‰Šé™¤", onClick={vm.deleteFood(original, onBack)})},
+        dismissButton={TextButtonLike("ã‚­ãƒ£ãƒ³ã‚»ãƒ«", onClick={confirmDelete=false})},
+    )
+}
+
+@Composable
+private fun GoalsScreen(vm: MainViewModel, onBack: () -> Unit) {
+    val goals by vm.goals.collectAsStateWithLifecycle()
+    val values = remember(goals) { mutableStateMapOf<String,String>().apply {
+        nutrientSpecs.forEach { spec -> put(spec.key, goals.firstOrNull {it.nutrientKey==spec.key}?.target?.let(::number).orEmpty()) }
+    } }
+    LazyColumn(Modifier.fillMaxSize(), contentPadding=PaddingValues(20.dp), verticalArrangement=Arrangement.spacedBy(10.dp)) {
+        item { PageHeader("ç›®æ¨™è¨­å®š", "å®Œäº†", onBack); Text("1æ—¥ã‚ãŸã‚Šã®ç›®æ¨™å€¤ã€‚ç©ºæ¬„ã«ã™ã‚‹ã¨ç›®æ¨™ãªã—ã«ãªã‚Šã¾ã™ã€‚å¤‰æ›´ã¯å³æ™‚ä¿å­˜ã•ã‚Œã¾ã™ã€‚", color=Muted, modifier=Modifier.padding(vertical=12.dp)) }
+        items(nutrientSpecs) { spec ->
+            Row(Modifier.fillMaxWidth(), verticalAlignment=Alignment.CenterVertically, horizontalArrangement=Arrangement.spacedBy(12.dp)) {
+                Text(spec.label, Modifier.weight(1f))
+                PaperField(values[spec.key].orEmpty(), { value -> values[spec.key]=value.filterNumber(); vm.setGoal(spec.key, value.toDoubleOrNull()?.toString().orEmpty()) }, Modifier.width(120.dp), placeholder="â€”")
+                Text("${spec.unit}/æ—¥", color=Muted, modifier=Modifier.width(62.dp))
+            }
+            HorizontalDivider(color=Rule)
+        }
+    }
+}
+
+@Composable
+private fun HistoryScreen(vm: MainViewModel) {
+    val entries by vm.history.collectAsStateWithLifecycle()
+    val activities by vm.historyActivities.collectAsStateWithLifecycle()
+    var nutrient by rememberSaveable { mutableStateOf("protein") }
+    var days by rememberSaveable { mutableIntStateOf(7) }
+    val end = LocalDate.now(); val dates = (days-1 downTo 0).map { end.minusDays(it.toLong()) }
+    val values = dates.map { date -> Exporter.sum(entries.filter { it.timestamp.localDate()==date }).value(nutrient) }
+    val spec = nutrientSpecs.first {it.key==nutrient}
+    val goals by vm.goals.collectAsStateWithLifecycle()
+    val goal = goals.firstOrNull { it.nutrientKey==nutrient }?.target
+    LazyColumn(Modifier.fillMaxSize(), contentPadding=PaddingValues(20.dp), verticalArrangement=Arrangement.spacedBy(16.dp)) {
+        item { PageHeader("æ¨ç§»") }
+        item { Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.spacedBy(6.dp)) {
+            listOf("protein","sugar","water","kcal","salt","fat").forEach { key ->
+                val s=nutrientSpecs.first {it.key==key}; LineButton(s.label, {nutrient=key}, Modifier.weight(1f))
+            }
+        } }
+        item { Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) { LineButton("7æ—¥", {days=7}); LineButton("14æ—¥", {days=14}) } }
+        item { BarChart(dates, values, goal); Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween) { Text("éå»${days}æ—¥é–“ãƒ»${spec.label} (${spec.unit})", color=Muted); Text("å¹³å‡ ${number(values.average())} ${spec.unit}/æ—¥") }; goal?.let { Text("ç›®æ¨™: ${number(it)} ${spec.unit}/æ—¥", color=Muted) } }
+        item { SectionTitle("æ‘‚å– kcal ã¨æ¶ˆè²» kcal") }
+        item {
+            dates.forEach { date ->
+                val intake=Exporter.sum(entries.filter {it.timestamp.localDate()==date}).kcal
+                val burn=activities.firstOrNull {it.date==date.toString()}?.totalCaloriesKcal
+                Row(Modifier.fillMaxWidth().padding(vertical=5.dp), horizontalArrangement=Arrangement.SpaceBetween) { Text("${date.monthValue}/${date.dayOfMonth}"); Text("æ‘‚å– ${number(intake)}ã€€æ¶ˆè²» ${burn?.let(::number) ?: "â€”"}") }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BarChart(dates: List<LocalDate>, values: List<Double>, goal: Double?) {
+    val maximum = maxOf(values.maxOrNull() ?: 1.0, goal ?: 0.0, 1.0)
+    Column(Modifier.fillMaxWidth().height(240.dp).padding(top=10.dp)) {
+        Row(Modifier.weight(1f).fillMaxWidth(), horizontalArrangement=Arrangement.spacedBy(6.dp), verticalAlignment=Alignment.Bottom) {
+            values.forEachIndexed { index, value ->
+                Column(Modifier.weight(1f), horizontalAlignment=Alignment.CenterHorizontally, verticalArrangement=Arrangement.Bottom) {
+                    Text(number(value), color=Muted)
+                    Box(Modifier.fillMaxWidth(.75f).fillMaxHeight((value/maximum).toFloat().coerceIn(.02f,1f)).then(Modifier), contentAlignment=Alignment.Center) {
+                        Canvas(Modifier.fillMaxSize()) { drawRect(if(index==values.lastIndex) Color(0xFFF2DFBB) else Color.Transparent); drawRect(Accent, style=Stroke(width=1.dp.toPx())) }
+                    }
+                }
+            }
+        }
+        Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.spacedBy(6.dp)) { dates.forEach { Text("${it.monthValue}/${it.dayOfMonth}", Modifier.weight(1f), textAlign=TextAlign.Center, color=Muted) } }
+    }
+}
+
+@Composable
+private fun ManualActivityDialog(existing: DailyActivityEntity?, onDismiss: () -> Unit, onSave: (DailyActivityEntity) -> Unit) {
+    var total by remember { mutableStateOf(existing?.totalCaloriesKcal?.let(::number).orEmpty()) }
+    var active by remember { mutableStateOf(existing?.activeCaloriesKcal?.let(::number).orEmpty()) }
+    var steps by remember { mutableStateOf(existing?.steps?.toString().orEmpty()) }
+    var exercise by remember { mutableStateOf(existing?.exerciseMinutes?.toString().orEmpty()) }
+    var sleep by remember { mutableStateOf(existing?.sleepMinutes?.toString().orEmpty()) }
+    var hr by remember { mutableStateOf(existing?.restingHr?.toString().orEmpty()) }
+    AlertDialog(onDismissRequest=onDismiss, title={Text("æ´»å‹•ãƒ‡ãƒ¼ã‚¿ã‚’æ‰‹å…¥åŠ›")}, text={
+        Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement=Arrangement.spacedBy(8.dp)) {
+            listOf("æ¶ˆè²»kcal" to total, "æ´»å‹•kcal" to active, "æ­©æ•°" to steps, "é‹å‹•åˆ†" to exercise, "ç¡çœ åˆ†" to sleep, "å®‰é™æ™‚å¿ƒæ‹" to hr).forEachIndexed { index, pair ->
+                PaperField(pair.second, {v -> when(index){0->total=v;1->active=v;2->steps=v;3->exercise=v;4->sleep=v;else->hr=v}}, Modifier.fillMaxWidth(), label=pair.first)
+            }
+        }
+    }, confirmButton={TextButtonLike("ä¿å­˜", onClick={ onSave(DailyActivityEntity(LocalDate.now().toString(), total.toDoubleOrNull(), active.toDoubleOrNull(), steps.toLongOrNull(), exercise.toIntOrNull(), sleep.toIntOrNull(), hr.toIntOrNull())) })}, dismissButton={TextButtonLike("ã‚­ãƒ£ãƒ³ã‚»ãƒ«", onDismiss)})
+}
+
+private fun String.filterNumber() = filter { it.isDigit() || it=='.' || it=='-' }
+private fun Map<String,String>.d(key: String) = this[key]?.toDoubleOrNull() ?: 0.0
+
+@Composable
+private fun HealthGuideScreen(vm: MainViewModel, onBack: () -> Unit, onPermission: () -> Unit) {
+    val context = LocalContext.current
+    val availability = remember { vm.health.availability() }
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement=Arrangement.spacedBy(18.dp)) {
+        PageHeader("Garmin é€£æºè¨­å®š", "å®Œäº†", onBack)
+        Text("ãƒ‡ãƒ¼ã‚¿ã®æµã‚Œ", color=Muted)
+        Text("Venu 2 Plus â†’ Garmin Connect â†’ ãƒ˜ãƒ«ã‚¹ã‚³ãƒã‚¯ãƒˆ â†’ ç§ã®æ „é¤Šè¨˜éŒ²")
+        Text("æœ¬ã‚¢ãƒ—ãƒªã¯Garminã¸ç›´æ¥æ¥ç¶šã›ãšã€ç«¯æœ«å†…ã®ãƒ˜ãƒ«ã‚¹ã‚³ãƒã‚¯ãƒˆã‚’èª­ã¿å–ã‚Šã¾ã™ã€‚æ›¸ãè¾¼ã¿æ¨©é™ã‚„å¤–éƒ¨é€šä¿¡ã¯ä½¿ç”¨ã—ã¾ã›ã‚“ã€‚")
+        HorizontalDivider(color=Rule)
+        GuideStep("1", "Androidã®è¨­å®šã§ãƒ˜ãƒ«ã‚¹ã‚³ãƒã‚¯ãƒˆã‚’é–‹ã", "è¨­å®š â†’ ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã¨ãƒ—ãƒ©ã‚¤ãƒã‚·ãƒ¼ â†’ ãƒ—ãƒ©ã‚¤ãƒã‚·ãƒ¼ â†’ ãƒ˜ãƒ«ã‚¹ã‚³ãƒã‚¯ãƒˆ")
+        GuideStep("2", "Garmin Connectã‹ã‚‰å…±æœ‰ã™ã‚‹", "Garmin Connect â†’ è¨­å®š â†’ æ¥ç¶šæ¸ˆã¿ã‚¢ãƒ—ãƒª â†’ Health Connectã€‚æ­©æ•°ãƒ»ã‚«ãƒ­ãƒªãƒ¼ãƒ»å¿ƒæ‹ãƒ»ç¡çœ ã‚’è¨±å¯ã—ã¾ã™ã€‚")
+        GuideStep("3", "æœ¬ã‚¢ãƒ—ãƒªã¸èª­ã¿å–ã‚Šã‚’è¨±å¯ã™ã‚‹", "ä¸‹ã®ãƒœã‚¿ãƒ³ã‹ã‚‰ã€è¡¨ç¤ºã•ã‚ŒãŸ7ç¨®é¡ã®èª­ã¿å–ã‚Šæ¨©é™ã‚’è¨±å¯ã—ã¾ã™ã€‚")
+        Text("çŠ¶æ…‹: ${when(availability){HealthAvailability.AVAILABLE->"åˆ©ç”¨å¯èƒ½";HealthAvailability.NEEDS_INSTALL->"æ›´æ–°ãŒå¿…è¦";HealthAvailability.NOT_SUPPORTED->"ã“ã®ç«¯æœ«ã§ã¯åˆ©ç”¨ä¸å¯"}}", color=if(availability==HealthAvailability.AVAILABLE) Accent else Muted)
+        LineButton("èª­ã¿å–ã‚Šæ¨©é™ã‚’è¨­å®š", onPermission, Modifier.fillMaxWidth(), availability==HealthAvailability.AVAILABLE)
+        LineButton("ãƒ˜ãƒ«ã‚¹ã‚³ãƒã‚¯ãƒˆè¨­å®šã‚’é–‹ã", {
+            runCatching { context.startActivity(Intent("android.health.connect.action.HEALTH_HOME_SETTINGS")) }
+        }, Modifier.fillMaxWidth())
+        HorizontalDivider(color=Rule)
+        Text("åŒæœŸã§ããªã„å ´åˆ", style=androidx.compose.material3.MaterialTheme.typography.titleLarge)
+        Text("Garmin Connectå´ã®åŒæœŸè¨­å®šã¨æœ€çµ‚åŒæœŸæ™‚åˆ»ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚ãƒ˜ãƒ«ã‚¹ã‚³ãƒã‚¯ãƒˆã‚’åˆ©ç”¨ã§ããªã„å ´åˆã¯ã€ãƒ›ãƒ¼ãƒ ã®ã€Œæ‰‹å…¥åŠ›ã€ã¾ãŸã¯å‡ºåŠ›ç”»é¢ã®Garmin CSVå–è¾¼ã‚’ä½¿ãˆã¾ã™ã€‚", color=Muted)
+    }
+}
+
+@Composable
+private fun GuideStep(number: String, title: String, body: String) {
+    Row(horizontalArrangement=Arrangement.spacedBy(12.dp)) {
+        Text(number, color=Accent, style=androidx.compose.material3.MaterialTheme.typography.titleLarge)
+        Column { Text(title, fontWeight=FontWeight.SemiBold); Text(body, color=Muted) }
+    }
+}
+
+@Composable
+private fun ExportScreen(vm: MainViewModel) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var from by rememberSaveable { mutableStateOf(LocalDate.now().minusDays(6)) }
+    var to by rememberSaveable { mutableStateOf(LocalDate.now()) }
+    var markdown by rememberSaveable { mutableStateOf(true) }
+    var target by rememberSaveable { mutableStateOf("ã™ã¹ã¦") }
+    var preview by remember { mutableStateOf("") }
+    var bytes by remember { mutableStateOf(ByteArray(0)) }
+    var pending by remember { mutableStateOf<Pair<String,ByteArray>?>(null) }
+    val saveLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("*/*")) { uri ->
+        uri?.let { context.contentResolver.openOutputStream(it)?.use { out -> out.write(pending?.second ?: bytes) } }
+    }
+    val backupImport = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        uri?.let { scope.launch { runCatching { context.contentResolver.openInputStream(it)!!.bufferedReader().use { r -> vm.restore(r.readText()) } } } }
+    }
+    val garminImport = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        uri?.let { context.contentResolver.openInputStream(it)?.bufferedReader()?.use { r -> vm.importGarminCsv(r.readText()) } }
+    }
+    LaunchedEffect(from, to, markdown, target) {
+        if (!from.isAfter(to)) {
+            val nutrition = vm.export(from,to,markdown)
+            val workout = vm.exportWorkout(from,to,markdown)
+            val result = when(target) {
+                "æ „é¤Š" -> nutrition
+                "ç­‹ãƒˆãƒ¬" -> workout
+                else -> {
+                    if(markdown) {
+                        val text = nutrition.first + "\n\n---\n\n" + workout.first
+                        text to text.toByteArray()
+                    } else workout
+                }
+            }
+            preview=result.first; bytes=result.second
+        }
+    }
+    LazyColumn(Modifier.fillMaxSize(), contentPadding=PaddingValues(20.dp), verticalArrangement=Arrangement.spacedBy(14.dp)) {
+        item { PageHeader("ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆ"); Text("è¨˜éŒ²ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã€ãƒãƒ£ãƒƒãƒˆAIã¸æ¸¡ã—ã¦ãƒ•ã‚£ãƒ¼ãƒ‰ãƒãƒƒã‚¯ã‚’å¾—ã‚‰ã‚Œã¾ã™ã€‚", color=Muted, modifier=Modifier.padding(top=10.dp)) }
+        item { SectionTitle("å‡ºåŠ›å¯¾è±¡"); Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            listOf("æ „é¤Š","ç­‹ãƒˆãƒ¬","ã™ã¹ã¦").forEach { item -> LineButton(item, {target=item; if(item=="ã™ã¹ã¦") markdown=true}, Modifier.weight(1f).height(44.dp)) }
+        }; if(target=="ã™ã¹ã¦") Text("çµ±åˆå‡ºåŠ›ã¯Markdownå½¢å¼ã§ã™ã€‚", color = Muted) }
+        item { Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+            LineButton("é–‹å§‹æ—¥\n$from", { showDatePicker(context,from){from=it} }, Modifier.weight(1f))
+            LineButton("çµ‚äº†æ—¥\n$to", { showDatePicker(context,to){to=it} }, Modifier.weight(1f))
+        } }
+        item { Row(horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+            LineButton("Markdown (.md)", {markdown=true}, Modifier.weight(1f))
+            LineButton("CSV (Excelç”¨)", {if(target!="ã™ã¹ã¦") markdown=false}, Modifier.weight(1f), target!="ã™ã¹ã¦")
+        } }
+        item { Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween) { Text("ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼", color=Muted); Text("${preview.lineSequence().count()}è¡Œ", color=Muted) } }
+        item { OutlinedCard(shape=RectangleShape, border=BorderStroke(1.dp,Rule), modifier=Modifier.fillMaxWidth().height(300.dp)) { Text(preview, Modifier.padding(12.dp).verticalScroll(rememberScrollState())) } }
+        item { Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+            LineButton("ãƒ•ã‚¡ã‚¤ãƒ«ä¿å­˜", { val name="å¥åº·è¨˜éŒ²_${target}_${from}_${to}.${if(markdown)"md" else "csv"}"; pending=name to bytes; saveLauncher.launch(name) }, Modifier.weight(1f))
+            LineButton("å…±æœ‰", { shareBytes(context, "å¥åº·è¨˜éŒ²_${target}.${if(markdown)"md" else "csv"}", bytes, if(markdown)"text/markdown" else "text/csv") }, Modifier.weight(1f))
+            LineButton("å…¨æ–‡ã‚³ãƒ”ãƒ¼", { (context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("æ „é¤Šè¨˜éŒ²",preview)) }, Modifier.weight(1f))
+        } }
+        item { SectionTitle("ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã¨ä»£æ›¿å–è¾¼") }
+        item { LineButton("å…¨ãƒ‡ãƒ¼ã‚¿ã‚’JSONã§ä¿å­˜", {
+            scope.launch { val data=vm.backup().toByteArray(); val name="eiyoapp-backup-${LocalDate.now()}.json"; pending=name to data; saveLauncher.launch(name) }
+        }, Modifier.fillMaxWidth()) }
+        item { LineButton("JSONãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’å¾©å…ƒ", {backupImport.launch(arrayOf("application/json","text/plain"))}, Modifier.fillMaxWidth()) }
+        item { LineButton("Garmin CSVã‚’å–ã‚Šè¾¼ã‚€", {garminImport.launch(arrayOf("text/csv","text/comma-separated-values","text/plain"))}, Modifier.fillMaxWidth()) }
+        item { Text("å¯¾å¿œåˆ—å: Date/æ—¥ä»˜ã€Total Calories/æ¶ˆè²»ã‚«ãƒ­ãƒªãƒ¼ã€Steps/æ­©æ•°ã€Exercise Minutes/é‹å‹•åˆ†ã€Sleep Duration/ç¡çœ æ™‚é–“ã€Resting Heart Rate/å®‰é™æ™‚å¿ƒæ‹ã€‚å–è¾¼å‰ã«JSONãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’æ¨å¥¨ã—ã¾ã™ã€‚", color=Muted) }
+    }
+}
+
+private fun showDatePicker(context: Context, current: LocalDate, onPicked: (LocalDate) -> Unit) {
+    DatePickerDialog(context, {_,y,m,d -> onPicked(LocalDate.of(y,m+1,d))}, current.year,current.monthValue-1,current.dayOfMonth).show()
+}
+
+private fun shareBytes(context: Context, name: String, bytes: ByteArray, mime: String) {
+    val dir=File(context.cacheDir,"exports").apply {mkdirs()}; val file=File(dir,name); file.writeBytes(bytes)
+    val uri=FileProvider.getUriForFile(context,"${context.packageName}.files",file)
+    context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
+        type=mime; putExtra(Intent.EXTRA_STREAM,uri); addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    },"æ „é¤Šè¨˜éŒ²ã‚’å…±æœ‰"))
+}
